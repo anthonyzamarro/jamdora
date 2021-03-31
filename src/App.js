@@ -1,13 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
-import Fetch from './components/fetchPhish';
+import FetchSongList from './components/FetchSongList';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-	<Fetch />
+        <h2>Select a Song</h2>
+      	<FetchSongList />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
