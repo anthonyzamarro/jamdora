@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  width: 100%;
+}
+
+
+.songs__all {
+  width: 40%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.song__marked {
+  width: 40%;
+  display: inline-block;
+}

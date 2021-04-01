@@ -1,12 +1,14 @@
 import React from 'react';
-import SelectList from './SelectList';
+import AllSelectList from './AllSelectList';
+import FetchMarkedSong from './FetchMarkedSong';
 
 export default class Fetch extends React.Component {
 	constructor(props) {
 		super(props);	
 		this.state = {
 			loading: true,
-			songs: null
+			songs: null,
+			selectSongId: null
 		}
 	}
 
@@ -17,18 +19,30 @@ export default class Fetch extends React.Component {
 		this.setState({ songs: json.response.data, loading: false });
 	}
 
+    selectSongIdHandler(song) {
+        this.setState({
+            selectSongId: song.songid,
+			selectSongTitle: song.song
+        })
+    }
+
 	render() {
 		return (
-			<ul>
+			<div className="container">
 				{
 				this.state.loading || !this.state.songs ?
 					 <p>Loading...</p>
 				:
-					this.state.songs.map(song => {
-						return <li key={song.songid}>{song.song}</li>
-					})
+					<AllSelectList 
+						songList={this.state.songs} 
+						chosenSongId={(e) => this.selectSongIdHandler(e)}
+					/>
 				}
-			</ul>
+					<FetchMarkedSong 
+						markedSongId={this.state.selectSongId} 
+						markedSongTitle={this.state.selectSongTitle} 
+					/>
+			</div>
 		) 
 	}
 
