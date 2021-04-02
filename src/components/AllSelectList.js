@@ -3,7 +3,7 @@ import React from 'react';
 export default class AllSelectList extends React.Component {
 
     handleSongIdClick(song, e) {
-        this.props.chosenSongId(song);
+        this.props.chosenSong(song);
     }
 
 

@@ -7,8 +7,8 @@ export default class Fetch extends React.Component {
 		super(props);	
 		this.state = {
 			loading: true,
-			songs: null,
-			selectSongId: null
+			selectSongId: null,
+			selectSongTitle: null
 		}
 	}
 
@@ -35,7 +35,7 @@ export default class Fetch extends React.Component {
 				:
 					<AllSelectList 
 						songList={this.state.songs} 
-						chosenSongId={(e) => this.selectSongIdHandler(e)}
+						chosenSong={(e) => this.selectSongIdHandler(e)}
 					/>
 				}
 					<FetchMarkedSong 
