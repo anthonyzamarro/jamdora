@@ -13,7 +13,7 @@ export default class Fetch extends React.Component {
 	}
 
 	async componentDidMount() {
-		const allSongs = await fetch('https://api.phish.net/v3/jamcharts/all?apikey=074F91D5F301220F1104')
+		const allSongs = await fetch(`https://api.phish.net/v3/jamcharts/all?apikey=${process.env.REACT_APP_PHISH_NET_KEY}`)
 		const json = await allSongs.json()
 
 		this.setState({ songs: json.response.data, loading: false });

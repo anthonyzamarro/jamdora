@@ -10,19 +10,18 @@ export default class FetchMarkedSong extends React.Component {
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
-		const markedSongs = await fetch(`https://api.phish.net/v3/jamcharts/get?apikey=074F91D5F301220F1104&songid=${this.props.markedSongId}`)
+		const markedSongs = await fetch(`https://api.phish.net/v3/jamcharts/get?apikey=${process.env.REACT_APP_PHISH_NET_KEY}&songid=${this.props.markedSongId}`)
 		const json = await markedSongs.json()
 
         if (json.error_code === 0) {
             this.filterMarkedSongs(json.response.data.entries)
         }
 
-        // if (prevProps.markedSongTitle !== this.props.MarkedSongTitle) {
-        //    this.setState({
-        //        selectSongList: [...this.state.selectSongList, this.props.markedSongTitle]
-        //    }) 
-        //    return;
-        // }
+        if (prevProps.markedSongTitle !== this.props.MarkedSongTitle) {
+           this.setState({
+               selectSongList: this.state.selectSongList.concat(this.props.markedSongTitle)
+           }) 
+        }
     }
 
     filterMarkedSongs(songs) {
