@@ -6,16 +6,17 @@ export default class Play extends React.Component {
         this.audioRef = React.createRef();
     }
 
-    playSong() {
-        
-    }
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         const songSource = this.props.songToPlay !== null ? this.props.songToPlay[0].mp3 : null;
-        if (this.audioRef.current) {
-            this.audioRef.current.src = songSource;
-            this.audioRef.current.load(); 
-            this.audioRef.current.play(); 
+        if(this.props.songToPlay !== prevProps.songToPlay) { 
+
+            if (this.audioRef.current) {
+                this.audioRef.current.pause(); 
+                this.audioRef.current.src = songSource;
+                this.audioRef.current.load(); 
+                this.audioRef.current.play(); 
+            }
+
         }
     }
 

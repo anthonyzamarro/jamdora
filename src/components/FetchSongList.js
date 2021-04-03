@@ -19,7 +19,7 @@ export default class Fetch extends React.Component {
 		const json = await allSongs.json()
 
 		this.setState({ songs: json.response.data, loading: false });
-	}
+	}	
 
     selectSongIdHandler(song) {
         this.setState({
@@ -42,7 +42,7 @@ export default class Fetch extends React.Component {
 		})
 	}
 
-		render() {
+	render() {
 		return (
 			<div className="container">
 				<Play songToPlay={this.state.songVersion}/>
