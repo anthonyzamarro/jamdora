@@ -1,29 +1,30 @@
 import React from 'react';
 
 export default class Play extends React.Component {
+    constructor(props) {
+        super(props);
+        this.audioRef = React.createRef();
+    }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if(prevProps.songToPlay) {
-    //         this.
-    //     }
-    // }
     playSong() {
-        const playSong = this.props.songToPlay !== null ? this.props.songToPlay[0].mp3 : null;
-        this.setState({ isPlaying: playSong, function() {
-                this.refs.audio.pause()
-                this.refs.audio.load()
-                this.refs.audio.play()
-            }
-            
-        })
+        
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const songSource = this.props.songToPlay !== null ? this.props.songToPlay[0].mp3 : null;
+        if (this.audioRef.current) {
+            this.audioRef.current.src = songSource;
+            this.audioRef.current.load(); 
+            this.audioRef.current.play(); 
+        }
     }
 
 
     render() {
         return (
             <div>
-                <audio controls ref="audio">
-                    <source src={e => this.playSong()} type="mpeg"/>
+                <audio controls ref={this.audioRef}>
+                    <source src="" type="mpeg"/>
                 </audio>
             </div>
         )
