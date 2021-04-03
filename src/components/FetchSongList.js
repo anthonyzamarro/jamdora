@@ -1,6 +1,7 @@
 import React from 'react';
 import AllSelectList from './AllSelectList';
 import FetchMarkedSong from './FetchMarkedSong';
+import Play from './Play'
 
 export default class Fetch extends React.Component {
 	constructor(props) {
@@ -8,7 +9,8 @@ export default class Fetch extends React.Component {
 		this.state = {
 			loading: true,
 			selectSongId: null,
-			selectSongTitle: null
+			selectSongTitle: null,
+			songVersion: null
 		}
 	}
 
@@ -26,9 +28,24 @@ export default class Fetch extends React.Component {
         })
     }
 
-	render() {
+	async selectedSongVersion(songInfo, songTitle) {
+		const showDate = await fetch(`http://phish.in/api/v1/shows/${songInfo.showdate}`, {
+									headers: {
+									Authorization: `Bearer ${process.env.REACT_APP_PHISH_IN_KEY}`
+								}
+							})
+		const json	= await showDate.json();
+
+		const songVersion = json.data.tracks.filter(song => song.title === songTitle);
+		this.setState({
+			songVersion: songVersion
+		})
+	}
+
+		render() {
 		return (
 			<div className="container">
+				<Play songToPlay={this.state.songVersion}/>
 				{
 				this.state.loading || !this.state.songs ?
 					 <p>Loading...</p>
@@ -41,6 +58,7 @@ export default class Fetch extends React.Component {
 					<FetchMarkedSong 
 						markedSongId={this.state.selectSongId} 
 						markedSongTitle={this.state.selectSongTitle} 
+						chosenVersion={(songInfo, songTitle) => this.selectedSongVersion(songInfo, songTitle)}
 					/>
 			</div>
 		) 

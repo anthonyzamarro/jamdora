@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import FetchSongList from './components/FetchSongList';
 
@@ -6,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Jamdora</h1>
       	<FetchSongList />
         <p>
           Edit <code>src/App.js</code> and save to reload.

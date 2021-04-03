@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class AllSelectList extends React.Component {
 
-    handleSongIdClick(song, e) {
+    onClickHandler(song, e) {
         this.props.chosenSong(song);
     }
 
@@ -19,7 +19,7 @@ export default class AllSelectList extends React.Component {
                         <li 
                             key={song.songid} 
                             id={song.songid}
-                            onClick={(e) => this.handleSongIdClick(song)}
+                            onClick={(e) => this.onClickHandler(song)}
                             >
                                 {song.song}
                         </li>

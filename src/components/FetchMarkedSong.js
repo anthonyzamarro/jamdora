@@ -28,8 +28,11 @@ export default class FetchMarkedSong extends React.Component {
         })
     }
 
+    onClickHandler(songInfo, songTitle) {
+        this.props.chosenVersion(songInfo, songTitle)
+    }
+
     render() {
-        console.log(this.state)
         return (
             <div className="song__marked">
                 <h2>Selected Song</h2>
@@ -37,7 +40,13 @@ export default class FetchMarkedSong extends React.Component {
                 {
                     this.state.markedVersions && this.state.markedVersions.map((marked, idx) => {
                         return (
-                           <p>{marked.showdate}</p> 
+                           <p 
+                                key={idx}
+                                onClick={(e) => this.onClickHandler(marked, this.props.markedSongTitle)}
+                            >
+                                {marked.showdate}
+                           </p>
+                           
                         )
                     })
                 }
