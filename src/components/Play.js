@@ -25,7 +25,7 @@ export default class Play extends React.Component {
         const title = this.props.songToPlay &&  this.props.songToPlay[0].title;
         const date = this.props.songToPlay  &&  this.props.songToPlay[0].show_date;
         return (
-            <div>
+            <div className="song__info">
                 <audio controls ref={this.audioRef}>
                     <source src="" type="mpeg"/>
                 </audio>

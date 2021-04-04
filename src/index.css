@@ -16,7 +16,9 @@ code {
   width: 100%;
 }
 
-
+.song__info {
+  min-height: 50px;
+}
 .songs__all {
   width: 40%;
   display: inline-block;
