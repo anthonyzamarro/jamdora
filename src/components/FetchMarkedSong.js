@@ -33,6 +33,7 @@ export default class FetchMarkedSong extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div className="song__marked">
                 <h2>Selecte a Version</h2>

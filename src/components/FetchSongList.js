@@ -1,6 +1,6 @@
 import React from 'react';
-//import AllSelectList from './AllSelectList';
-import SearchForSong from './SearchForSong';
+import AllSelectList from './AllSelectList';
+//import SearchForSong from './SearchForSong';
 import FetchMarkedSong from './FetchMarkedSong';
 import Play from './Play'
 
@@ -22,11 +22,10 @@ export default class Fetch extends React.Component {
 		this.setState({ songs: json.response.data, loading: false });
 	}	
 
-    selectSongIdHandler(song) {
-		console.log(song)
+    selectSongIdHandler(songId, songName) {
         this.setState({
-            selectSongId: song.songid,
-			selectSongTitle: song.song
+            selectSongId: songId, 
+			selectSongTitle: songName
         })
     }
 
@@ -52,14 +51,10 @@ export default class Fetch extends React.Component {
 				this.state.loading || !this.state.songs ?
 					 <p>Loading...</p>
 				:
-					<SearchForSong 
+					<AllSelectList 
 						songList={this.state.songs} 
-						chosenSong={(e) => this.selectSongIdHandler(e)}
+						chosenSong={(x, y) => this.selectSongIdHandler(x, y)}
 					/>
-					// <AllSelectList 
-					// 	songList={this.state.songs} 
-					// 	chosenSong={(e) => this.selectSongIdHandler(e)}
-					// />
 
 				}
 					<FetchMarkedSong 

@@ -1,9 +1,17 @@
 import React from 'react';
 
 export default class AllSelectList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state =  {
+            value: ''
+        }
+        this.handleSongIdChange = this.handleSongIdChange.bind(this);
+    }
 
-    onClickHandler(song, e) {
-        this.props.chosenSong(song);
+    handleSongIdChange(event) {
+        this.setState({ value: event.target.value })
+        this.props.chosenSong(event.target.selectedOptions[0].id, event.target.value);
     }
 
 
@@ -12,21 +20,22 @@ export default class AllSelectList extends React.Component {
         return (
             <div className="songs__all">
             <h2>Select a Song</h2>
-			<ul className="songs">
+			<select className="songs" value={this.state.value} onChange={this.handleSongIdChange}>
 				{
+                    
 					this.props.songList.map(song => {
 						return  (
-                        <li 
-                            key={song.songid} 
+                        <option 
+                            key={song.songid}
                             id={song.songid}
-                            onClick={(e) => this.onClickHandler(song)}
-                            >
+                            value={song.song}
+                        >
                                 {song.song}
-                        </li>
+                        </option>
                         )
 					})
 				}
-			</ul>
+			</select>
             </div>
         )
     }
