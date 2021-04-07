@@ -22,8 +22,9 @@ export default class FetchMarkedSong extends React.Component {
 
     filterMarkedSongs(songs, id) {
         const markedRecommended = songs.filter(song => song.marked_recommended > 0)
+        console.log(markedRecommended);
         this.setState({
-            markedVersions: markedRecommended,
+            markedVersions: markedRecommended.length > 0 ? markedRecommended : false,
             markedId: id
         })
     }
@@ -35,28 +36,26 @@ export default class FetchMarkedSong extends React.Component {
     render() {
         return (
             <div className="song__marked">
-                <h2>Selecte a Version</h2>
+               <h2>Selecte a Version</h2>
                <p>{this.props.markedSongTitle}</p>
                 {
-                    this.state.markedVersions && this.state.markedVersions.map((marked, idx) => {
+                  !this.state.markedVersions ? <p>🤷‍♂️ &nbsp; sorry, no marked versions</p> :
+                    this.state.markedVersions.map((marked, idx) => {
                         return (
                            <p 
                                 key={idx}
                                 onClick={(e) => this.onClickHandler(marked, this.props.markedSongTitle)}
                             >
-                                {marked.showdate}
+                                {
+                                    marked.showdate
+                                }
                            </p>
-                           
                         )
                     })
-                }
+                  } 
+                
 
             </div>
         )
     }
 }
-
-
-
-
-
