@@ -12,15 +12,24 @@ export default class SearchForSong extends React.Component {
     }
 
     onKeyUpHandler(event) {
-        console.log(event);
         if(event.keyCode === 13) {
-            this.props.chosenSong(event.target.value);
+            const song = this.props.songList.filter(song => {
+                const lower = song.song.toLowerCase();
+                if (lower.includes(event.target.value)) {
+                    return song;
+                }
+            });
+            if (song.length < 2) {
+                this.props.chosenSong(song[0].songid, song[0].song);
+            } else {
+                console.log(`Too many songs with same string!!!`, song);
+            }
         }
     }
     
     render() {
         return (
-            <div className="songs__all">
+            <div>
                 <h2>Search for Song</h2>
                 
                 <input type="text" onKeyUp={this.onKeyUpHandler} />
