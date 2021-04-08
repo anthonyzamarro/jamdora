@@ -7,8 +7,12 @@ export default class SearchForSong extends React.Component {
             value: ''
         }
 
+        this.listRef = React.createRef();
+
         this.onKeyUpHandler = this.onKeyUpHandler.bind(this);
         this.onFocusHandler = this.onFocusHandler.bind(this);
+        this.onBlurHandler = this.onBlurHandler.bind(this);
+        this.buildList = this.buildList.bind(this);
     }
 
     onKeyUpHandler(event) {
@@ -28,13 +32,25 @@ export default class SearchForSong extends React.Component {
         }
     }
 
+    buildList() {
+    return this.props.songList.map((song, index) => {
+            return `<li key=${song.songid} class="dropdown__item">${song.song}</li>`
+        });
+    }
+
     onFocusHandler(event) {
-        if(event.currentTarget == event.target) {
-            console.log('focused', event);
-            event.target.insertAdjacentHTML('afterend', '<div>Hi</div>');
+        if(event.currentTarget === event.target) {
+            document.querySelector('.dropdown').classList.toggle('active');
         } else {
             console.log('not focused', event);
         }
+
+    }
+    
+    onBlurHandler(event) {
+        if(event.currentTarget === event.target) {
+            document.querySelector('.dropdown').classList.toggle('active');
+        } 
 
     }
     
@@ -42,7 +58,19 @@ export default class SearchForSong extends React.Component {
         return (
             <div>
                 <h2>Search for Song</h2>
-                <input type="text" onKeyUp={this.onKeyUpHandler} onFocus={this.onFocusHandler}/>
+                <input
+                    type="text" 
+                    onKeyUp={this.onKeyUpHandler}
+                    onFocus={this.onFocusHandler}
+                    onBlur={this.onBlurHandler}
+                />
+                <ul className="dropdown">
+                    {
+                         this.props.songList && this.props.songList.map((song, index) => {
+                            return <li key={song.songid} className="dropdown__item">{song.song}</li>
+                        }) 
+                    }
+                </ul>
                 <input type="submit" value="Search" />
             </div>
         )

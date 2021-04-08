@@ -29,3 +29,19 @@ code {
   width: 40%;
   display: inline-block;
 }
+
+.dropdown {
+  display: none;
+  width: 400px;
+  max-height: 500px;
+  overflow: scroll;
+  margin: auto;
+}
+
+.dropdown.active {
+  display: block;
+}
+
+.dropdown__item {
+  list-style: none;
+}
