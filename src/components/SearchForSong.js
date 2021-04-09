@@ -15,28 +15,37 @@ export default class SearchForSong extends React.Component {
         this.onClickHandler = this.onClickHandler.bind(this);
     }
 
-    onKeyUpHandler(event) {
-        if(event.keyCode === 13) {
-            const song = this.props.songList.filter(song => {
+    onKeyUpHandler(e) {
+        if(e.keyCode === 13) {
+                const song = this.props.songList.filter(song => {
                 const lower = song.song.toLowerCase();
-                if (lower.includes(event.target.value)) {
+                if (lower.includes(e.target.value)) {
+                    document.querySelector('.dropdown').classList.remove('active'); 
                     return song;
                 }
                 return null;
             });
+            // come back and fix this mess
+            // user can only select one song at a time
             if (song.length < 2) {
                 this.props.chosenSong(song[0].songid, song[0].song);
             } else {
                 console.log(`Too many songs with same string!!!`, song);
             }
         }
+
+        const filtered = this.props.songList.filter((song, index) => {
+            if(song.song.includes(e.target.value)) {
+                console.log(song)
+                return song
+            }
+        });
+        console.log(filtered);
     }
 
-    onFocusHandler(event) {
-        if(event.currentTarget === event.target) {
+    onFocusHandler(e) {
+        if(e.currentTarget === e.target) {
             document.querySelector('.dropdown').classList.add('active');
-        } else {
-            console.log('not focused', event);
         }
     }
     
@@ -47,6 +56,7 @@ export default class SearchForSong extends React.Component {
     }
 
     onClickHandler(e) {
+        document.querySelector('.dropdown').classList.remove('active'); 
         this.props.chosenSong(e.target.id, e.target.textContent);
     }
     
