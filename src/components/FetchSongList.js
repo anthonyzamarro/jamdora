@@ -1,5 +1,5 @@
 import React from 'react';
-import AllSelectList from './AllSelectList';
+//import AllSelectList from './AllSelectList';
 import FetchMarkedSong from './FetchMarkedSong';
 import Play from './Play'
 import SearchForSong from './SearchForSong';
@@ -47,18 +47,15 @@ export default class Fetch extends React.Component {
 		return (
 			<div className="container">
 				<Play songToPlay={this.state.songVersion}/>
-				<SearchForSong 
-					songList={this.state.songs} 
-					chosenSong={(i, s) => this.selectSongIdHandler(i, s)}	
-				/>
+				
 				{
 				this.state.loading || !this.state.songs ?
 					 <p>Loading...</p>
 				:
 
-					<AllSelectList 
+					<SearchForSong 
 						songList={this.state.songs} 
-						chosenSong={(i, s) => this.selectSongIdHandler(i, s)}
+						chosenSong={(i, s) => this.selectSongIdHandler(i, s)}	
 					/>
 				}
 

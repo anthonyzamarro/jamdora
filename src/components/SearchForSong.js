@@ -12,7 +12,7 @@ export default class SearchForSong extends React.Component {
         this.onKeyUpHandler = this.onKeyUpHandler.bind(this);
         this.onFocusHandler = this.onFocusHandler.bind(this);
         this.onBlurHandler = this.onBlurHandler.bind(this);
-        this.buildList = this.buildList.bind(this);
+        this.onClickHandler = this.onClickHandler.bind(this);
     }
 
     onKeyUpHandler(event) {
@@ -32,31 +32,27 @@ export default class SearchForSong extends React.Component {
         }
     }
 
-    buildList() {
-    return this.props.songList.map((song, index) => {
-            return `<li key=${song.songid} class="dropdown__item">${song.song}</li>`
-        });
-    }
-
     onFocusHandler(event) {
         if(event.currentTarget === event.target) {
-            document.querySelector('.dropdown').classList.toggle('active');
+            document.querySelector('.dropdown').classList.add('active');
         } else {
             console.log('not focused', event);
         }
-
     }
     
-    onBlurHandler(event) {
-        if(event.currentTarget === event.target) {
-            document.querySelector('.dropdown').classList.toggle('active');
-        } 
+    onBlurHandler(e) {
+        if (e.relatedTarget == null) {
+            document.querySelector('.dropdown').classList.remove('active'); 
+        }
+    }
 
+    onClickHandler(e) {
+        this.props.chosenSong(e.target.id, e.target.textContent);
     }
     
     render() {
         return (
-            <div>
+            <div className="songs__all">
                 <h2>Search for Song</h2>
                 <input
                     type="text" 
@@ -64,14 +60,23 @@ export default class SearchForSong extends React.Component {
                     onFocus={this.onFocusHandler}
                     onBlur={this.onBlurHandler}
                 />
-                <ul className="dropdown">
+                <input type="submit" value="Search" />
+                <ul 
+                    className="dropdown"
+                    tabIndex="-1"
+                >
                     {
                          this.props.songList && this.props.songList.map((song, index) => {
-                            return <li key={song.songid} className="dropdown__item">{song.song}</li>
+                            return <li 
+                                onClick={this.onClickHandler} 
+                                onBlur={this.onBlurHandler}
+                                key={song.songid} 
+                                id={song.songid} 
+                                className="dropdown__item" 
+                                tabIndex={index}>{song.song}</li>
                         }) 
                     }
                 </ul>
-                <input type="submit" value="Search" />
             </div>
         )
     }

@@ -33,13 +33,15 @@ code {
 .dropdown {
   display: none;
   width: 400px;
-  max-height: 500px;
+  max-height: 200px;
   overflow: scroll;
   margin: auto;
+  background: gray;
 }
 
 .dropdown.active {
   display: block;
+  transition: all ease-in .5s;
 }
 
 .dropdown__item {
