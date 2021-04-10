@@ -34,13 +34,13 @@ export default class SearchForSong extends React.Component {
             }
         }
 
-        const filtered = this.props.songList.filter((song, index) => {
-            if(song.song.includes(e.target.value)) {
-                console.log(song)
-                return song
-            }
-        });
-        console.log(filtered);
+        // const filtered = this.props.songList.filter((song, index) => {
+        //     if(song.song.includes(e.target.value)) {
+        //         console.log(song)
+        //         return song
+        //     }
+        // });
+        // console.log(filtered);
     }
 
     onFocusHandler(e) {
