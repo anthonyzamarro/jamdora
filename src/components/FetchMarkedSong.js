@@ -36,7 +36,7 @@ export default class FetchMarkedSong extends React.Component {
     render() {
         return (
             <div className="song__marked">
-               <h2>Selecte a Version</h2>
+               <h2>Select a Version</h2>
                <p>{this.props.markedSongTitle}</p>
                 {
                   !this.state.markedVersions ? <p>🤷‍♂️ &nbsp; sorry, no marked versions</p> :

@@ -3,6 +3,8 @@ import React from 'react';
 import FetchMarkedSong from './FetchMarkedSong';
 import Play from './Play'
 import SearchForSong from './SearchForSong';
+import PlayList from './PlayList';
+
 
 export default class Fetch extends React.Component {
 	constructor(props) {
@@ -65,6 +67,8 @@ export default class Fetch extends React.Component {
 						markedSongTitle={this.state.selectSongTitle} 
 						chosenVersion={(songInfo, songTitle) => this.selectedSongVersion(songInfo, songTitle)}
 					/>
+
+					<PlayList />
 			</div>
 		) 
 	}
