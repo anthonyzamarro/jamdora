@@ -29,8 +29,13 @@ export default class FetchMarkedSong extends React.Component {
         })
     }
 
-    onClickHandler(songInfo, songTitle) {
-        this.props.chosenVersion(songInfo, songTitle)
+    // onClickHandler(songInfo, songTitle) {
+    //     this.props.chosenVersion(songInfo, songTitle)
+    // }
+
+    onDragHandler(e) {
+        console.log(e);
+        e.dataTransfer.setData('text/plain', e.target.textContent);
     }
 
     render() {
@@ -44,7 +49,9 @@ export default class FetchMarkedSong extends React.Component {
                         return (
                            <p 
                                 key={idx}
-                                onClick={(e) => this.onClickHandler(marked, this.props.markedSongTitle)}
+//                                onClick={(e) => this.onClickHandler(marked, this.props.markedSongTitle)}
+                                onDrag={(e) => this.onDragHandler(e)}
+                                draggable="true"
                             >
                                 {
                                     marked.showdate
