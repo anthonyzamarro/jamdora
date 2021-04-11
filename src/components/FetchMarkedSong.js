@@ -22,7 +22,6 @@ export default class FetchMarkedSong extends React.Component {
 
     filterMarkedSongs(songs, id) {
         const markedRecommended = songs.filter(song => song.marked_recommended > 0)
-        console.log(markedRecommended);
         this.setState({
             markedVersions: markedRecommended.length > 0 ? markedRecommended : false,
             markedId: id
@@ -34,7 +33,6 @@ export default class FetchMarkedSong extends React.Component {
     // }
 
     onDragHandler(e) {
-        console.log(e);
         e.dataTransfer.setData('text/plain', e.target.textContent);
     }
 
@@ -49,7 +47,6 @@ export default class FetchMarkedSong extends React.Component {
                         return (
                            <p 
                                 key={idx}
-//                                onClick={(e) => this.onClickHandler(marked, this.props.markedSongTitle)}
                                 onDrag={(e) => this.onDragHandler(e)}
                                 draggable="true"
                             >
