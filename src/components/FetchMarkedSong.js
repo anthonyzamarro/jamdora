@@ -7,6 +7,8 @@ export default class FetchMarkedSong extends React.Component {
         this.state = {
             markedVersions: null
         }
+
+        this.onDragHandler = this.onDragHandler.bind(this);
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -34,6 +36,7 @@ export default class FetchMarkedSong extends React.Component {
 
     onDragHandler(e) {
         e.dataTransfer.setData('text/plain', e.target.textContent);
+        e.dataTransfer.setData('application/song', e.target.id);
     }
 
     render() {
@@ -47,8 +50,9 @@ export default class FetchMarkedSong extends React.Component {
                         return (
                            <p 
                                 key={idx}
-                                onDrag={(e) => this.onDragHandler(e)}
+                                onDragStart={this.onDragHandler}
                                 draggable="true"
+                                id={this.props.markedSongId}
                             >
                                 {
                                     marked.showdate

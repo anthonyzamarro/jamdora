@@ -11,18 +11,19 @@ export default class PlayList extends React.Component {
     }
 
     onDropHandler(e) {
-        console.log('onDropHandler', e)
         e.preventDefault();
         const data = e.dataTransfer.getData("text/plain");
-        console.log(data);
-//        e.target.appendChild(document.getElementById(data));;
+        this.setState({
+            playList: this.state.playList.concat(data)
+        })
+
+        console.log(this.state);
+
     }
 
     onDragOverHandler(e) {
         e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-        //console.log('onDragOverHandler', e);
-
+        e.dataTransfer.dropEffect = 'copy';
     }
 
     render() {
@@ -34,7 +35,9 @@ export default class PlayList extends React.Component {
                     id="target"
                 >
 
-                    <li></li>
+            <li>{
+                this.state.playList.map(song => song)
+            }</li>
                 </ul>
             </div>
         )
