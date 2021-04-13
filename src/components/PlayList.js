@@ -34,7 +34,8 @@ export default class PlayList extends React.Component {
         return (
             <div className="playlist">
                 <h2>Play List</h2>
-                <div onDrop={this.onDropHandler} 
+                <div
+                    onDrop={this.onDropHandler} 
                     onDragOver={this.onDragOverHandler}
                     id="target"
                     className="playlist__zone"
@@ -42,7 +43,7 @@ export default class PlayList extends React.Component {
 
                     {
                         this.state.playList.map((info, index) => {
-                            return <p key={index}>{info.date} <span data-title={info.title} data-date={info.date} onClick={this.playSong}>Play &gt;</span></p>
+                            return <p key={index}><span>{info.title}</span> {info.date} <span data-title={info.title} data-date={info.date} onClick={this.playSong}>Play &gt;</span></p>
                         })
                     }
                 </div>
