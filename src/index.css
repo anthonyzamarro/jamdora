@@ -47,3 +47,7 @@ code {
 .dropdown__item {
   list-style: none;
 }
+
+.playlist__zone {
+  height: 100px;
+}

@@ -9,6 +9,10 @@ export default class PlayList extends React.Component {
         this.onDropHandler = this.onDropHandler.bind(this);
         this.onDragOverHandler = this.onDragOverHandler.bind(this);
     }
+    
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('updated', prevProps, prevState);
+    }
 
     onDropHandler(e) {
         e.preventDefault();
@@ -16,9 +20,6 @@ export default class PlayList extends React.Component {
         this.setState({
             playList: this.state.playList.concat(data)
         })
-
-        console.log(this.state);
-
     }
 
     onDragOverHandler(e) {
@@ -30,15 +31,18 @@ export default class PlayList extends React.Component {
         return (
             <div className="playlist">
                 <h2>Play List</h2>
-                <ul onDrop={this.onDropHandler} 
+                <div onDrop={this.onDropHandler} 
                     onDragOver={this.onDragOverHandler}
                     id="target"
+                    className="playlist__zone"
                 >
 
-            <li>{
-                this.state.playList.map(song => song)
-            }</li>
-                </ul>
+                    {
+                        this.state.playList.map((song, index) => {
+                            return <p key={index}>{song}</p>
+                        })
+                    }
+                </div>
             </div>
         )
     }
