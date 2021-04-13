@@ -8,17 +8,20 @@ export default class PlayList extends React.Component {
         }
         this.onDropHandler = this.onDropHandler.bind(this);
         this.onDragOverHandler = this.onDragOverHandler.bind(this);
+        this.playSong = this.playSong.bind(this);
     }
     
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('updated', prevProps, prevState);
+    playSong(e) {
+        this.props.chosenVersion(e.target.dataset.date, e.target.dataset.title);
     }
 
     onDropHandler(e) {
         e.preventDefault();
-        const data = e.dataTransfer.getData("text/plain");
+        const date = e.dataTransfer.getData("text/plain");
+        const title = e.dataTransfer.getData("application/title");
+        console.log('drop handler', e);
         this.setState({
-            playList: this.state.playList.concat(data)
+            playList: this.state.playList.concat({'title': title, 'date': date})
         })
     }
 
@@ -38,8 +41,8 @@ export default class PlayList extends React.Component {
                 >
 
                     {
-                        this.state.playList.map((song, index) => {
-                            return <p key={index}>{song}</p>
+                        this.state.playList.map((info, index) => {
+                            return <p key={index}>{info.date} <span data-title={info.title} data-date={info.date} onClick={this.playSong}>Play &gt;</span></p>
                         })
                     }
                 </div>
