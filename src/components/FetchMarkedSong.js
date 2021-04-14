@@ -39,7 +39,6 @@ export default class FetchMarkedSong extends React.Component {
     onDragHandler(e) {
         e.dataTransfer.setData('text/plain', e.target.textContent);
         e.dataTransfer.setData('application/title', e.target.dataset.title);
-        console.log('drag handler', e);
     }
 
     render() {

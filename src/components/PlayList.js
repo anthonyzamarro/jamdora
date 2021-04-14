@@ -19,7 +19,6 @@ export default class PlayList extends React.Component {
         e.preventDefault();
         const date = e.dataTransfer.getData("text/plain");
         const title = e.dataTransfer.getData("application/title");
-        console.log('drop handler', e);
         this.setState({
             playList: this.state.playList.concat({'title': title, 'date': date})
         })
