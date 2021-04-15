@@ -31,27 +31,15 @@ export default class SearchForSong extends React.Component {
             } 
         }
 
+        
+    }
+
+    onChange(e) {
         const filtered = this.props.songList.filter((song, index) => {
             let lowerCaseSong = song.song.toLowerCase();
             let lowerCaseInput = e.target.value.toLowerCase();
             if (lowerCaseInput !== "") {
                 if(lowerCaseSong.includes(lowerCaseInput)) {
-                    console.log(e.target.value, song.song);
-                    return song
-                }
-            }
-            
-        });
-        this.setState({
-            list: filtered
-        });
-    }
-
-    onChange(e) {
-        const filtered = this.props.songList.filter((song, index) => {
-            if (e.target.value !== "") {
-                if(song.song.includes(e.target.value)) {
-                    console.log(e.target.value, song.song);
                     return song
                 }
             }
@@ -88,22 +76,14 @@ export default class SearchForSong extends React.Component {
                     onKeyUp={this.onKeyUpHandler}
                     onFocus={this.onFocusHandler}
                     onBlur={this.onBlurHandler}
-//                    onChange={this.onChange}
+                    onChange={this.onChange}
                 />
                 <ul 
                     className="dropdown"
                     tabIndex="-1"
                 >
                     {
-                        //  this.props.songList && this.props.songList.map((song, index) => {
-                        //     return <li 
-                        //         onClick={this.onClickHandler} 
-                        //         onBlur={this.onBlurHandler}
-                        //         key={song.songid} 
-                        //         id={song.songid} 
-                        //         className="dropdown__item" 
-                        //         tabIndex={index}>{song.song}</li>
-                        // }) 
+                       
                          this.state.list && this.state.list.map((song, index) => {
                             return <li 
                                 onClick={this.onClickHandler} 
