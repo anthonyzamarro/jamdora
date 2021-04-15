@@ -30,6 +30,21 @@ export default class SearchForSong extends React.Component {
                 this.props.chosenSong(song[0].songid, song[0].song);
             } 
         }
+
+        const filtered = this.props.songList.filter((song, index) => {
+            let lowerCaseSong = song.song.toLowerCase();
+            let lowerCaseInput = e.target.value.toLowerCase();
+            if (lowerCaseInput !== "") {
+                if(lowerCaseSong.includes(lowerCaseInput)) {
+                    console.log(e.target.value, song.song);
+                    return song
+                }
+            }
+            
+        });
+        this.setState({
+            list: filtered
+        });
     }
 
     onChange(e) {
@@ -73,7 +88,7 @@ export default class SearchForSong extends React.Component {
                     onKeyUp={this.onKeyUpHandler}
                     onFocus={this.onFocusHandler}
                     onBlur={this.onBlurHandler}
-                    onChange={this.onChange}
+//                    onChange={this.onChange}
                 />
                 <ul 
                     className="dropdown"
