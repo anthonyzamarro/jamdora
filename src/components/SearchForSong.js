@@ -48,6 +48,7 @@ export default class SearchForSong extends React.Component {
         this.setState({
             list: filtered
         });
+
     }
 
     onFocusHandler(e) {
@@ -58,6 +59,11 @@ export default class SearchForSong extends React.Component {
     
     onBlurHandler(e) {
         if (e.relatedTarget == null) {
+            // reset song list if user has filtered by typing
+            // but then clicked out of the input box
+            this.setState({
+                list: this.props.songList
+            })
             document.querySelector('.dropdown').classList.remove('active'); 
         }
     }
