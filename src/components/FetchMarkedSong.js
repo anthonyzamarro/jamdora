@@ -1,5 +1,5 @@
 import React from 'react';
-
+import unslug from '../utils/unslug.js';
 
 export default class FetchMarkedSong extends React.Component {
     constructor(props) {
@@ -23,7 +23,21 @@ export default class FetchMarkedSong extends React.Component {
     }
 
     filterMarkedSongs(songs, id) {
-        const markedRecommended = songs.filter(song => song.marked_recommended > 0)
+        const markedRecommended = songs.filter(song => {
+            if (song.marked_recommended > 0) { 
+//               const location =  unslug(song.link);
+                fetch(`https://api.phish.net/v3/shows/query?apikey=${process.env.REACT_APP_PHISH_NET_KEY}&showids=${song.showid}`)
+                    .then(res => res.json())
+                    .then(showInfo => {
+
+                        return  {
+                            'showdate': song.showdate,
+                            'location': showInfo.response.data[0].location
+                        }
+                    });
+//        		const json = showInfo.json()
+            }
+        });
         this.setState({
             markedVersions: markedRecommended.length > 0 ? markedRecommended : false,
             markedId: id
