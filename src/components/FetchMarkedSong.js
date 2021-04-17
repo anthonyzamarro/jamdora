@@ -5,7 +5,7 @@ export default class FetchMarkedSong extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            markedVersions: []
+            markedVersions: null
         }
 
         this.onDragHandler = this.onDragHandler.bind(this);
@@ -25,7 +25,6 @@ export default class FetchMarkedSong extends React.Component {
     async filterMarkedSongs(songs, id) {
         // only get marked song versions
         const markedFiltered = songs.filter(song => song.marked_recommended > 0 );
-        console.log(markedFiltered);
 
         // since the marked songs don't include their location info (state, country, venue)
         // i have to make another request for this information.
