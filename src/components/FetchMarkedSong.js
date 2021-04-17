@@ -5,7 +5,7 @@ export default class FetchMarkedSong extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            markedVersions: null
+            markedVersions: []
         }
 
         this.onDragHandler = this.onDragHandler.bind(this);
@@ -17,27 +17,31 @@ export default class FetchMarkedSong extends React.Component {
         
         if (this.props.markedSongId !== prevProps.markedSongId) {
             if (json.error_code === 0) {
-                this.filterMarkedSongs(json.response.data.entries, this.props.markedSongId)
+                this.filterMarkedSongs(json.response.data.entries, this.props.markedSongId);
             }
         }
     }
 
-    filterMarkedSongs(songs, id) {
-        const markedRecommended = songs.filter(song => {
-            if (song.marked_recommended > 0) { 
-//               const location =  unslug(song.link);
-                fetch(`https://api.phish.net/v3/shows/query?apikey=${process.env.REACT_APP_PHISH_NET_KEY}&showids=${song.showid}`)
-                    .then(res => res.json())
-                    .then(showInfo => {
+    async filterMarkedSongs(songs, id) {
+        // only get marked song versions
+        const markedFiltered = songs.filter(song => song.marked_recommended > 0 );
+        console.log(markedFiltered);
 
-                        return  {
-                            'showdate': song.showdate,
-                            'location': showInfo.response.data[0].location
-                        }
-                    });
-//        		const json = showInfo.json()
-            }
-        });
+        // since the marked songs don't include their location info (state, country, venue)
+        // i have to make another request for this information.
+        // the second async call results in an array of promises, which all need to resolve
+        const markedRecommended = await Promise.all(markedFiltered.map(async song => {
+           const fetchShow = await fetch(`https://api.phish.net/v3/shows/query?apikey=${process.env.REACT_APP_PHISH_NET_KEY}&showids=${song.showid}&order=ASC`);
+            const show = await fetchShow.json();
+
+            return {
+                'song': this.props.markedSongTitle,
+                'showdate': song.showdate,
+                'location': show.response.data[0].location,
+                'venue': show.response.data[0].venue
+            } 
+        }));
+
         this.setState({
             markedVersions: markedRecommended.length > 0 ? markedRecommended : false,
             markedId: id
@@ -47,9 +51,7 @@ export default class FetchMarkedSong extends React.Component {
     // onClickHandler(songInfo, songTitle) {
     //     this.props.chosenVersion(songInfo, songTitle)
     // }
-
    
-
     onDragHandler(e) {
         e.dataTransfer.setData('text/plain', e.target.textContent);
         e.dataTransfer.setData('application/title', e.target.dataset.title);
@@ -64,16 +66,15 @@ export default class FetchMarkedSong extends React.Component {
                   !this.state.markedVersions ? <p>🤷‍♂️ &nbsp; sorry, no marked versions</p> :
                     this.state.markedVersions.map((marked, idx) => {
                         return (
-                           <p 
+                           <div
                                 key={idx}
                                 onDragStart={this.onDragHandler}
                                 draggable="true"
                                 data-title={this.props.markedSongTitle}
                             >
-                                {
-                                    marked.showdate
-                                }
-                           </p>
+                                    <p>{marked.showdate}</p>
+                                    <p>{marked.venue} <span> {marked.location}</span></p>
+                           </div>
                         )
                     })
                   } 
