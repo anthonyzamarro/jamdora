@@ -1,9 +1,9 @@
-const unslug = (link)  => {
-    if (link !== '') {
-        const sluggedLocation = link.match(/(?<=\d{4}-)[^\.]+/)[0].split('-');
+// const unslug = (link)  => {
+//     if (link !== '') {
+//         const sluggedLocation = link.match(/(?<=\d{4}-)[^\.]+/)[0].split('-');
 
-        console.log('unslug', sluggedLocation);
-    }
-}
+//         console.log('unslug', sluggedLocation);
+//     }
+// }
 
-export default unslug;
+// export default unslug;

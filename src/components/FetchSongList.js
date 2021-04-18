@@ -13,7 +13,8 @@ export default class Fetch extends React.Component {
 			loading: true,
 			selectSongId: null,
 			selectSongTitle: null,
-			songVersion: null
+			songVersion: null,
+			playList: []
 		}
 	}
 
@@ -22,6 +23,12 @@ export default class Fetch extends React.Component {
 		const json = await allSongs.json()
 
 		this.setState({ songs: json.response.data, loading: false });
+	}	
+
+	updatePlayList(songs) {
+		this.setState({
+			playList: songs
+		});
 	}	
 
     selectSongIdHandler(songId, songName) {
@@ -48,7 +55,10 @@ export default class Fetch extends React.Component {
 	render() {
 		return (
 			<div className="container">
-				<Play songToPlay={this.state.songVersion}/>
+				<Play 
+					songToPlay={this.state.songVersion}
+					playList={this.state.playList}
+				/>
 				
 				{
 				this.state.loading || !this.state.songs ?
@@ -69,6 +79,7 @@ export default class Fetch extends React.Component {
 
 					<PlayList
 						chosenVersion={(showDate, songTitle) => this.selectedSongVersion(showDate, songTitle)}
+						addToPlayList={(e) => this.updatePlayList(e) }
 					/>
 			</div>
 		) 

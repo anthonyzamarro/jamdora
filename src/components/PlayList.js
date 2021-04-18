@@ -21,7 +21,10 @@ export default class PlayList extends React.Component {
         const title = e.dataTransfer.getData("application/title");
         this.setState({
             playList: this.state.playList.concat({'title': title, 'date': date})
-        })
+        }, e => {
+            this.props.addToPlayList(this.state.playList);
+        });
+
     }
 
     onDragOverHandler(e) {
@@ -42,7 +45,17 @@ export default class PlayList extends React.Component {
 
                     {
                         this.state.playList.map((info, index) => {
-                            return <p key={index}><span>{info.title}</span> {info.date} <span data-title={info.title} data-date={info.date} onClick={this.playSong}>Play &gt;</span></p>
+                            return (
+                                <p key={index}>
+                                    <span>{info.title}</span> 
+                                        {info.date} 
+                                        <span 
+                                            data-title={info.title}
+                                            data-date={info.date} 
+                                            onClick={this.playSong}>Play &gt;
+                                        </span>
+                                    </p>
+                                )
                         })
                     }
                 </div>

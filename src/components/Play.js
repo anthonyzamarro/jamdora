@@ -7,6 +7,7 @@ export default class Play extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(this.props.playList);
         const songSource = this.props.songToPlay !== null ? this.props.songToPlay[0].mp3 : null;
         if(this.props.songToPlay !== prevProps.songToPlay) { 
 
