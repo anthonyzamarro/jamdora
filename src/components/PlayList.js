@@ -17,10 +17,11 @@ export default class PlayList extends React.Component {
 
     onDropHandler(e) {
         e.preventDefault();
-        const date = e.dataTransfer.getData("text/plain");
+        const text = e.dataTransfer.getData("text/plain");
         const title = e.dataTransfer.getData("application/title");
+        const date = e.dataTransfer.getData("application/date");
         this.setState({
-            playList: this.state.playList.concat({'title': title, 'date': date})
+            playList: this.state.playList.concat({'title': title, 'text': text, 'date': date})
         }, e => {
             this.props.addToPlayList(this.state.playList);
         });
@@ -48,11 +49,11 @@ export default class PlayList extends React.Component {
                             return (
                                 <p key={index}>
                                     <span>{info.title}</span> 
-                                        {info.date} 
+                                        {info.text} 
                                         <span 
                                             data-title={info.title}
                                             data-date={info.date} 
-                                            onClick={this.playSong}>Play &gt;
+                                            onClick={this.playSong}>&nbsp; Play &gt;
                                         </span>
                                     </p>
                                 )

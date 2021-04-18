@@ -54,6 +54,8 @@ export default class FetchMarkedSong extends React.Component {
     onDragHandler(e) {
         e.dataTransfer.setData('text/plain', e.target.textContent);
         e.dataTransfer.setData('application/title', e.target.dataset.title);
+        e.dataTransfer.setData('application/date', e.target.dataset.date);
+        console.log(e.target.dataset);
     }
 
     render() {
@@ -70,9 +72,10 @@ export default class FetchMarkedSong extends React.Component {
                                 onDragStart={this.onDragHandler}
                                 draggable="true"
                                 data-title={this.props.markedSongTitle}
+                                data-date={marked.showdate}
                             >
-                                    <p>{marked.showdate}</p>
-                                    <p>{marked.venue} <span> {marked.location}</span></p>
+                                <p>{marked.showdate}</p>
+                                <p>{marked.venue} <span> &nbsp; {marked.location} </span></p>
                            </div>
                         )
                     })
