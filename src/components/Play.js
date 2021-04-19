@@ -4,15 +4,15 @@ export default class Play extends React.Component {
     constructor(props) {
         super(props);
         this.audioRef = React.createRef();
-
-        this.state = {
-            playing: false
-        }
-
-        this.endOfCurrentSong = this.endOfCurrentSong.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount(e) {
+        this.audioRef.current.addEventListener("timeupdate", e => {
+            this.setState({
+                currentTime: e.target.currentTime,
+                duration: e.target.duration
+            });
+        });
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -25,20 +25,12 @@ export default class Play extends React.Component {
                 this.audioRef.current.play(); 
             }
         }
+
+        // handle when song ends and playList.length > 1
+        if (this.state && this.state.currentTime === this.state.duration) {
+            console.log(this.state, this.props.playList);
+        }
     }
-
-    endOfCurrentSong(e) {
-        console.log(e)
-        document.querySelector('audio').addEventListener('playing', a => {
-            console.log(a)
-            if (this.audioRef.current.ended) {
-                console.log(this.audioRef.current);
-                console.log(this.props);
-
-            }
-        })
-    }
-
 
     render() {
         const title = this.props.songToPlay &&  this.props.songToPlay[0].title;

@@ -55,7 +55,6 @@ export default class FetchMarkedSong extends React.Component {
         e.dataTransfer.setData('text/plain', e.target.textContent);
         e.dataTransfer.setData('application/title', e.target.dataset.title);
         e.dataTransfer.setData('application/date', e.target.dataset.date);
-        console.log(e.target.dataset);
     }
 
     render() {
