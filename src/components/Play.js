@@ -16,25 +16,50 @@ export default class Play extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        // console.log(this.props);
+        // there's only ever one song to play
         if(this.props.songToPlay !== prevProps.songToPlay) { 
-            const songSource = this.props.songToPlay !== null ? this.props.songToPlay[0].mp3 : null;
+            const songToPlay = this.props.songToPlay[0];
+            const songSource = this.props.songToPlay !== null ? songToPlay.mp3 : null;
             if (this.audioRef.current) {
                 this.audioRef.current.pause(); 
                 this.audioRef.current.src = songSource;
                 this.audioRef.current.load(); 
                 this.audioRef.current.play(); 
             }
-        }
 
-        // handle when song ends and playList.length > 1
-        if (this.state && this.state.currentTime === this.state.duration) {
-            console.log(this.state, this.props.playList);
+            this.props.playList.findIndex((s, i)=> {
+                if (songToPlay.title === s.title && songToPlay.show_date === s.date) {
+                    this.setState({
+                        currentSongPlayListIndex: i
+                    })
+                } 
+            });
+
+
+            
+        }
+        // play next song in playlist after current song is over.
+        if (this.state && this.state.currentTime !== undefined && this.state.currentTime === this.state.duration) {
+            if (this.props.playList.length > 0) {
+                const nextSong = this.props.playList[this.state.currentSongPlayListIndex + 1];
+                console.log(nextSong.date, nextSong.title, this.props);
+                this.props.nextSong(nextSong.date, nextSong.title);
+                // fetchedNextSong.then(res => console.log(res));
+                // console.log(this.props.playList, this.props.playList[this.state.currentSongPlayListIndex]);
+                // if (this.audioRef.current) {
+                //     this.audioRef.current.pause(); 
+                //     this.audioRef.current.src = this.props.playList[this.state.currentSongPlayListIndex + 1].mp3;
+                //     this.audioRef.current.load(); 
+                //     this.audioRef.current.play(); 
+                // }
+            }
         }
     }
 
     render() {
-        const title = this.props.songToPlay &&  this.props.songToPlay[0].title;
-        const date = this.props.songToPlay  &&  this.props.songToPlay[0].show_date;
+        const title =  this.props.songToPlay && this.props.songToPlay[0].title;
+        const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
         return (
             <div className="song__info">
                 <audio controls ref={this.audioRef} onClick={this.endOfCurrentSong}></audio>

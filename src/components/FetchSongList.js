@@ -38,7 +38,7 @@ export default class Fetch extends React.Component {
         })
     }
 
-	async selectedSongVersion(showdate, songTitle) {
+	selectedSongVersion = async (showdate, songTitle) => {
 		const showDate = await fetch(`http://phish.in/api/v1/shows/${showdate}`, {
 									headers: {
 									Authorization: `Bearer ${process.env.REACT_APP_PHISH_IN_KEY}`
@@ -46,7 +46,9 @@ export default class Fetch extends React.Component {
 							})
 		const json	= await showDate.json();
 
+
 		const songVersion = json.data.tracks.filter(song => song.title === songTitle);
+		console.log(songVersion);
 		this.setState({
 			songVersion: songVersion
 		})
@@ -58,6 +60,7 @@ export default class Fetch extends React.Component {
 				<Play 
 					songToPlay={this.state.songVersion}
 					playList={this.state.playList}
+					nextSong={this.selectedSongVersion}
 				/>
 				
 				{
