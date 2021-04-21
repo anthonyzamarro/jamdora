@@ -48,7 +48,6 @@ export default class Fetch extends React.Component {
 
 
 		const songVersion = json.data.tracks.filter(song => song.title === songTitle);
-		console.log(songVersion);
 		this.setState({
 			songVersion: songVersion
 		})

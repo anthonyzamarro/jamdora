@@ -32,7 +32,7 @@ export default class Play extends React.Component {
                 if (songToPlay.title === s.title && songToPlay.show_date === s.date) {
                     this.setState({
                         currentSongPlayListIndex: i
-                    })
+                    });
                 } 
             });
 
@@ -42,17 +42,12 @@ export default class Play extends React.Component {
         // play next song in playlist after current song is over.
         if (this.state && this.state.currentTime !== undefined && this.state.currentTime === this.state.duration) {
             if (this.props.playList.length > 0) {
-                const nextSong = this.props.playList[this.state.currentSongPlayListIndex + 1];
-                console.log(nextSong.date, nextSong.title, this.props);
-                this.props.nextSong(nextSong.date, nextSong.title);
-                // fetchedNextSong.then(res => console.log(res));
-                // console.log(this.props.playList, this.props.playList[this.state.currentSongPlayListIndex]);
-                // if (this.audioRef.current) {
-                //     this.audioRef.current.pause(); 
-                //     this.audioRef.current.src = this.props.playList[this.state.currentSongPlayListIndex + 1].mp3;
-                //     this.audioRef.current.load(); 
-                //     this.audioRef.current.play(); 
-                // }
+                const nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
+                 if (nextSong !== undefined) {
+                    console.log(nextSong);
+                    console.log(this.state);
+                    this.props.nextSong(nextSong.date, nextSong.title);
+                 }
             }
         }
     }
@@ -62,7 +57,7 @@ export default class Play extends React.Component {
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
         return (
             <div className="song__info">
-                <audio controls ref={this.audioRef} onClick={this.endOfCurrentSong}></audio>
+                <audio controls ref={this.audioRef}></audio>
                 <p>{title}</p>
                 <p>{date}</p>
             </div>
