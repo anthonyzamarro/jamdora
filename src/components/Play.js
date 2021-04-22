@@ -35,17 +35,17 @@ export default class Play extends React.Component {
                     });
                 } 
             });
-
-
-            
         }
         // play next song in playlist after current song is over.
         if (this.state && this.state.currentTime !== undefined && this.state.currentTime === this.state.duration) {
+            this.audioRef.current.pause();
             if (this.props.playList.length > 0) {
                 const nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
                  if (nextSong !== undefined) {
-                    console.log(nextSong);
-                    console.log(this.state);
+                     this.setState({
+                         currentTime: 0,
+                         duration: 1
+                    });
                     this.props.nextSong(nextSong.date, nextSong.title);
                  }
             }
