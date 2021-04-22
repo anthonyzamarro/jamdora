@@ -9,10 +9,19 @@ export default class PlayList extends React.Component {
         this.onDropHandler = this.onDropHandler.bind(this);
         this.onDragOverHandler = this.onDragOverHandler.bind(this);
         this.playSong = this.playSong.bind(this);
+        this.removeFromPlayList = this.removeFromPlayList.bind(this);
     }
     
     playSong(e) {
         this.props.chosenVersion(e.target.dataset.date, e.target.dataset.title);
+    }
+
+    removeFromPlayList(e) {
+        let copiedList = [...this.state.playList];
+        copiedList.splice(parseInt(e.target.id), 1); 
+        this.setState({
+            playList: copiedList
+        });
     }
 
     onDropHandler(e) {
@@ -48,6 +57,7 @@ export default class PlayList extends React.Component {
                         this.state.playList.map((info, index) => {
                             return (
                                 <p key={index}>
+                                    <span onClick={this.removeFromPlayList} id={index}>X Remove&nbsp; </span>
                                     <span>{info.title}</span> 
                                         {info.text} 
                                         <span 
