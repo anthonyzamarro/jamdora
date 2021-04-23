@@ -51,3 +51,35 @@ code {
 .playlist__zone {
   height: 100px;
 }
+
+
+/*
+  Controls
+*/
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.time {
+  width: 20%;
+}
+
+.time__duration {
+  height: 5px;
+  background-color: navajowhite;
+  flex-basis: 300px;
+}
+
+.duration {
+  position: relative;
+}
+
+.duration__passed {
+  position: absolute;
+  width: 0%;
+  background: red;
+  height: 5px;
+}

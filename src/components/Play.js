@@ -57,7 +57,20 @@ export default class Play extends React.Component {
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
         return (
             <div className="song__info">
-                <audio controls ref={this.audioRef}></audio>
+                <div className="controls">
+                    <audio ref={this.audioRef} className="controls__play"> </audio>
+                    <div className="controls__pause"> # </div>
+                    <div className="controls__play"> |&gt; </div>
+                    <div className="controls__next"> &gt; </div>
+                    <div className="controls__previous"> &lt; </div>
+                    <div className="controls__time time"> 
+                        <div className="time__start"></div>
+                        <div className="time__duration duration">
+                           <div className="duration__passed"></div> 
+                        </div>
+                        <div className="time__end"></div>
+                    </div>
+                </div>
                 <p>{title}</p>
                 <p>{date}</p>
             </div>
