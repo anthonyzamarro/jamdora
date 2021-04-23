@@ -3,7 +3,16 @@ import React from 'react';
 export default class Play extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state  = {
+            currentTime: 0,
+            duration: 1
+        }
+
         this.audioRef = React.createRef();
+        this.updateTime = this.updateTime.bind(this);
+        this.pauseSong = this.pauseSong.bind(this);
+        this.playSong = this.playSong.bind(this);
     }
 
     componentDidMount(e) {
@@ -50,25 +59,51 @@ export default class Play extends React.Component {
                  }
             }
         }
+
+        if (this.state.timePassed !== prevState.timePassed) {
+            this.updateTime()
+        }
     }
 
+    updateTime(e) {
+        let num = 0
+        this.setState({
+            timePassed: num++
+        })
+        console.log(e);
+    }
+
+    pauseSong() {
+        this.audioRef.current.pause();
+    }
+
+    playSong() {
+        this.audioRef.current.play();
+    }
     render() {
         const title =  this.props.songToPlay && this.props.songToPlay[0].title;
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
+        const startTime = this.state.currentTime !== null ? this.state.currentTime : 0;
+        const endTime = this.state.duration !== null ? this.state.duration : 0;
         return (
             <div className="song__info">
                 <div className="controls">
                     <audio ref={this.audioRef} className="controls__play"> </audio>
-                    <div className="controls__pause"> # </div>
-                    <div className="controls__play"> |&gt; </div>
+                    <div className="controls__pause" onClick={this.pauseSong}> # </div>
+                    <div className="controls__play"onClick={this.playSong}> |&gt; </div>
                     <div className="controls__next"> &gt; </div>
                     <div className="controls__previous"> &lt; </div>
                     <div className="controls__time time"> 
-                        <div className="time__start"></div>
+                        <div className="time__start"> {startTime} </div>
                         <div className="time__duration duration">
-                           <div className="duration__passed"></div> 
+                           <div 
+                                className="duration__passed"
+                                onTimeUpdate={this.updateTime}
+                                style={{width: this.state.currentTime}}
+                           >
+                           </div> 
                         </div>
-                        <div className="time__end"></div>
+                        <div className="time__end"> {endTime} </div>
                     </div>
                 </div>
                 <p>{title}</p>

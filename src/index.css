@@ -65,12 +65,15 @@ code {
 
 .time {
   width: 20%;
+  display: flex;
+  align-items: center;
 }
 
 .time__duration {
   height: 5px;
   background-color: navajowhite;
   flex-basis: 300px;
+  margin: 12px;
 }
 
 .duration {
