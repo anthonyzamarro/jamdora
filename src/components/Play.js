@@ -99,9 +99,10 @@ export default class Play extends React.Component {
     render() {
         const title =  this.props.songToPlay && this.props.songToPlay[0].title;
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
-        let endTime = this.state.duration !== null ? 
-            (this.state.duration / 60).toFixed(2) : 0;
-            endTime = endTime.split('.').join(':');
+        // let endTime = this.state.duration !== null ? 
+        //     (this.state.duration / 60).toFixed(2) : 0;
+        //     endTime = endTime.split('.').join(':');
+        let endTime = this.state.duration !== null ? this.state.duration : 0;
         return (
             <div className="song__info">
                 <div className="controls">
@@ -112,22 +113,36 @@ export default class Play extends React.Component {
                     <div className="controls__previous"> &lt; </div>
                     <div className="controls__time time"> 
                         <div className="time__start"> {
-                            `${this.state.minutesElapsed}:${this.state.secondsElapsed < 10 ? '0'+this.state.secondsElapsed : this.state.secondsElapsed}`
+                            `${this.state.minutesElapsed}:${this.state.secondsElapsed < 10 ? '0' + this.state.secondsElapsed : this.state.secondsElapsed}`
                             } </div>
                         <div className="time__duration duration">
                            <div 
                                 className="duration__elapsed"
                                 onTimeUpdate={this.updateTime}
-                                style={{width: Math.round(this.state.secondsElapsed)}}
+                                style={{width: Math.round(this.state.currentTime)}}
                            >
                            </div> 
                         </div>
-                        <div className="time__end"> {endTime} </div>
+                        <div className="time__end"> {formatTime(endTime)} </div>
                     </div>
                 </div>
                 <p>{title}</p>
                 <p>{date}</p>
             </div>
         )
+    }
+}
+
+function formatTime(time) {
+    if (time > 0) {
+        time = (time / 60).toFixed(2);
+        time = time.split('.');
+        let seconds = parseInt(time[1]);
+        let minutes = parseInt(time[0]);
+        if (seconds >= 60) {
+            seconds = seconds - 60;
+            minutes++;
+        }
+        return `${minutes}:${seconds < 10 ? '0' + seconds : seconds }`;
     }
 }
