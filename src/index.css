@@ -80,7 +80,7 @@ code {
   position: relative;
 }
 
-.duration__passed {
+.duration__elapsed {
   position: absolute;
   width: 0%;
   background: red;

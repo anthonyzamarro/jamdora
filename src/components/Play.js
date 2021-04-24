@@ -6,7 +6,9 @@ export default class Play extends React.Component {
 
         this.state  = {
             currentTime: 0,
-            duration: 1
+            duration: 1,
+            secondsElapsed: 0,
+            minutesElapsed: 0
         }
 
         this.audioRef = React.createRef();
@@ -18,8 +20,8 @@ export default class Play extends React.Component {
     componentDidMount(e) {
         this.audioRef.current.addEventListener("timeupdate", e => {
             this.setState({
-                currentTime: e.target.currentTime,
-                duration: e.target.duration
+                currentTime: Math.round(e.target.currentTime),
+                duration: Math.round(e.target.duration)
             });
         });
     }
@@ -60,17 +62,23 @@ export default class Play extends React.Component {
             }
         }
 
-        if (this.state.timePassed !== prevState.timePassed) {
-            this.updateTime()
+        if (this.state.currentTime !== prevState.currentTime) {
+            this.updateTime();
         }
     }
 
-    updateTime(e) {
-        let num = 0
-        this.setState({
-            timePassed: num++
-        })
-        console.log(e);
+    updateTime() {
+         if (this.state.secondsElapsed >= 59) {
+            this.setState(prevState => {
+                return {
+                    secondsElapsed: -1,
+                    minutesElapsed: prevState.minutesElapsed + 1
+                }
+            });
+        }
+        this.setState(prevState => {
+            return { secondsElapsed: prevState.secondsElapsed + 1 }
+        });
     }
 
     pauseSong() {
@@ -83,7 +91,7 @@ export default class Play extends React.Component {
     render() {
         const title =  this.props.songToPlay && this.props.songToPlay[0].title;
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
-        const startTime = this.state.currentTime !== null ? this.state.currentTime : 0;
+        // const startTime = this.state.currentTime !== null ? this.state.currentTime : 0;
         const endTime = this.state.duration !== null ? this.state.duration : 0;
         return (
             <div className="song__info">
@@ -94,12 +102,14 @@ export default class Play extends React.Component {
                     <div className="controls__next"> &gt; </div>
                     <div className="controls__previous"> &lt; </div>
                     <div className="controls__time time"> 
-                        <div className="time__start"> {startTime} </div>
+                        <div className="time__start"> {
+                            `${this.state.minutesElapsed}:${this.state.secondsElapsed < 10 ? '0'+this.state.secondsElapsed : this.state.secondsElapsed}`
+                            } </div>
                         <div className="time__duration duration">
                            <div 
-                                className="duration__passed"
+                                className="duration__elapsed"
                                 onTimeUpdate={this.updateTime}
-                                style={{width: this.state.currentTime}}
+                                style={{width: Math.round(this.state.currentTime).toFixed(2)}}
                            >
                            </div> 
                         </div>
