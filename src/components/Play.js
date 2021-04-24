@@ -29,14 +29,19 @@ export default class Play extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         // console.log(this.props);
         // there's only ever one song to play
-        if(this.props.songToPlay !== prevProps.songToPlay) { 
+        if(this.props.songToPlay !== prevProps.songToPlay) {
+            this.setState({
+                secondsElapsed: 0,
+                minutesElapsed: 0
+            });
+
             const songToPlay = this.props.songToPlay[0];
             const songSource = this.props.songToPlay !== null ? songToPlay.mp3 : null;
             if (this.audioRef.current) {
                 this.audioRef.current.pause(); 
                 this.audioRef.current.src = songSource;
                 this.audioRef.current.load(); 
-                this.audioRef.current.play(); 
+                this.audioRef.current.play();
             }
 
             this.props.playList.findIndex((s, i)=> {
@@ -55,7 +60,9 @@ export default class Play extends React.Component {
                  if (nextSong !== undefined) {
                      this.setState({
                          currentTime: 0,
-                         duration: 1
+                         duration: 1,
+                         secondsElapsed: 0,
+                         minutesElapsed: 0
                     });
                     this.props.nextSong(nextSong.date, nextSong.title);
                  }
@@ -88,11 +95,13 @@ export default class Play extends React.Component {
     playSong() {
         this.audioRef.current.play();
     }
+
     render() {
         const title =  this.props.songToPlay && this.props.songToPlay[0].title;
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
-        // const startTime = this.state.currentTime !== null ? this.state.currentTime : 0;
-        const endTime = this.state.duration !== null ? this.state.duration : 0;
+        let endTime = this.state.duration !== null ? 
+            (this.state.duration / 60).toFixed(2) : 0;
+            endTime = endTime.split('.').join(':');
         return (
             <div className="song__info">
                 <div className="controls">
@@ -109,7 +118,7 @@ export default class Play extends React.Component {
                            <div 
                                 className="duration__elapsed"
                                 onTimeUpdate={this.updateTime}
-                                style={{width: Math.round(this.state.currentTime).toFixed(2)}}
+                                style={{width: Math.round(this.state.secondsElapsed)}}
                            >
                            </div> 
                         </div>
