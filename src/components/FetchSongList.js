@@ -55,7 +55,7 @@ export default class Fetch extends React.Component {
 
 	render() {
 		return (
-			<div className="container">
+			<>
 				<Play 
 					songToPlay={this.state.songVersion}
 					playList={this.state.playList}
@@ -83,7 +83,7 @@ export default class Fetch extends React.Component {
 						chosenVersion={(showDate, songTitle) => this.selectedSongVersion(showDate, songTitle)}
 						addToPlayList={(e) => this.updatePlayList(e) }
 					/>
-			</div>
+			</>
 		) 
 	}
 

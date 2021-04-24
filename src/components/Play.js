@@ -96,6 +96,15 @@ export default class Play extends React.Component {
         this.audioRef.current.play();
     }
 
+    togglePlay() {
+        if (this.audioRef.current) {
+            if (this.audioRef.current.paused()) {
+                this.audioRef.current.play();
+            }
+            this.audioRef.current.pause();
+        }
+    }
+
     render() {
         const title =  this.props.songToPlay && this.props.songToPlay[0].title;
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
@@ -107,8 +116,7 @@ export default class Play extends React.Component {
             <div className="song__info">
                 <div className="controls">
                     <audio ref={this.audioRef} className="controls__play"> </audio>
-                    <div className="controls__pause" onClick={this.pauseSong}> # </div>
-                    <div className="controls__play"onClick={this.playSong}> |&gt; </div>
+                    <div className="controls__play" onClick={this.togglePlay}> |&gt; </div>
                     <div className="controls__next"> &gt; </div>
                     <div className="controls__previous"> &lt; </div>
                     <div className="controls__time time"> 

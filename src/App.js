@@ -1,24 +1,13 @@
-import './App.css';
 import FetchSongList from './components/FetchSongList';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <FetchSongList />
+
+      <footer>
         <h1>Jamdora</h1>
-      	<FetchSongList />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </footer>
     </div>
   );
 }
