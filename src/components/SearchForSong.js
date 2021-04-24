@@ -76,7 +76,6 @@ export default class SearchForSong extends React.Component {
     render() {
         return (
             <div className="songs__all">
-                <h2>Search for Song</h2>
                 <input
                     type="text" 
                     onKeyUp={this.onKeyUpHandler}

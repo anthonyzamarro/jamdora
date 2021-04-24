@@ -61,28 +61,34 @@ export default class Fetch extends React.Component {
 					playList={this.state.playList}
 					nextSong={this.selectedSongVersion}
 				/>
-				
-				{
-				this.state.loading || !this.state.songs ?
-					 <p>Loading...</p>
-				:
+				<div className="search-song__container container">
+					<h2>Search for Song</h2>
+						{
+						this.state.loading || !this.state.songs ?
+							
+							<p>Loading...</p>
+						:
 
-					<SearchForSong 
-						songList={this.state.songs} 
-						chosenSong={(i, s) => this.selectSongIdHandler(i, s)}	
-					/>
-				}
+							<SearchForSong 
+								songList={this.state.songs} 
+								chosenSong={(i, s) => this.selectSongIdHandler(i, s)}	
+							/>
+						}
+				</div>	
 
-
+				<div className="container">
 					<FetchMarkedSong 
 						markedSongId={this.state.selectSongId} 
 						markedSongTitle={this.state.selectSongTitle} 
 					/>
+				</div>
 
+				<div className="container">
 					<PlayList
 						chosenVersion={(showDate, songTitle) => this.selectedSongVersion(showDate, songTitle)}
 						addToPlayList={(e) => this.updatePlayList(e) }
 					/>
+				</div>
 			</>
 		) 
 	}

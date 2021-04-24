@@ -116,9 +116,9 @@ export default class Play extends React.Component {
             <div className="song__info">
                 <div className="controls">
                     <audio ref={this.audioRef} className="controls__play"> </audio>
+                    <div className="controls__previous"> &lt; </div>
                     <div className="controls__play" onClick={this.togglePlay}> |&gt; </div>
                     <div className="controls__next"> &gt; </div>
-                    <div className="controls__previous"> &lt; </div>
                     <div className="controls__time time"> 
                         <div className="time__start"> {
                             `${this.state.minutesElapsed}:${this.state.secondsElapsed < 10 ? '0' + this.state.secondsElapsed : this.state.secondsElapsed}`
