@@ -13,8 +13,9 @@ export default class Play extends React.Component {
 
         this.audioRef = React.createRef();
         this.updateTime = this.updateTime.bind(this);
-        this.pauseSong = this.pauseSong.bind(this);
-        this.playSong = this.playSong.bind(this);
+        // this.pauseSong = this.pauseSong.bind(this);
+        // this.playSong = this.playSong.bind(this);
+        this.togglePlay = this.togglePlay.bind(this);
     }
 
     componentDidMount(e) {
@@ -88,20 +89,21 @@ export default class Play extends React.Component {
         });
     }
 
-    pauseSong() {
-        this.audioRef.current.pause();
-    }
+    // pauseSong() {
+    //     this.audioRef.current.pause();
+    // }
 
-    playSong() {
-        this.audioRef.current.play();
-    }
+    // playSong() {
+    //     this.audioRef.current.play();
+    // }
 
     togglePlay() {
         if (this.audioRef.current) {
-            if (this.audioRef.current.paused()) {
+            if (this.audioRef.current.paused) {
                 this.audioRef.current.play();
+            } else {
+                this.audioRef.current.pause();
             }
-            this.audioRef.current.pause();
         }
     }
 
@@ -115,7 +117,7 @@ export default class Play extends React.Component {
         return (
             <div className="song__info">
                 <div className="controls">
-                    <audio ref={this.audioRef} className="controls__play"> </audio>
+                    <audio ref={this.audioRef} className="controls__play"></audio>
                     <div className="controls__previous"> &lt; </div>
                     <div className="controls__play" onClick={this.togglePlay}> |&gt; </div>
                     <div className="controls__next"> &gt; </div>
