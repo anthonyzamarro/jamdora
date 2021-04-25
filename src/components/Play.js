@@ -18,7 +18,7 @@ export default class Play extends React.Component {
         this.togglePlay = this.togglePlay.bind(this);
     }
 
-    componentDidMount(e) {
+    componentDidMount() {
         this.audioRef.current.addEventListener("timeupdate", e => {
             this.setState({
                 currentTime: Math.round(e.target.currentTime),
@@ -149,10 +149,7 @@ function formatTime(time) {
         time = time.split('.');
         let seconds = parseInt(time[1]);
         let minutes = parseInt(time[0]);
-        if (seconds >= 60) {
-            seconds = seconds - 60;
-            minutes++;
-        }
+        seconds = 100 - seconds;
         return `${minutes}:${seconds < 10 ? '0' + seconds : seconds }`;
     }
 }

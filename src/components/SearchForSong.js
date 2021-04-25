@@ -26,7 +26,7 @@ export default class SearchForSong extends React.Component {
                 return null;
             });
 
-            if (song.length < 2) {
+            if (song.length && song.length < 2) {
                 this.props.chosenSong(song[0].songid, song[0].song);
             } 
         }
