@@ -6,15 +6,12 @@ export default class Play extends React.Component {
 
         this.state  = {
             currentTime: 0,
-            duration: 1,
             secondsElapsed: 0,
             minutesElapsed: 0
         }
 
         this.audioRef = React.createRef();
         this.updateTime = this.updateTime.bind(this);
-        // this.pauseSong = this.pauseSong.bind(this);
-        // this.playSong = this.playSong.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
     }
 
@@ -28,8 +25,7 @@ export default class Play extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log(this.props);
-        // there's only ever one song to play
+        // there's only ever one song to play from clicking play button
         if(this.props.songToPlay !== prevProps.songToPlay) {
             this.setState({
                 secondsElapsed: 0,
@@ -89,14 +85,6 @@ export default class Play extends React.Component {
         });
     }
 
-    // pauseSong() {
-    //     this.audioRef.current.pause();
-    // }
-
-    // playSong() {
-    //     this.audioRef.current.play();
-    // }
-
     togglePlay() {
         if (this.audioRef.current) {
             if (this.audioRef.current.paused) {
@@ -110,10 +98,7 @@ export default class Play extends React.Component {
     render() {
         const title =  this.props.songToPlay && this.props.songToPlay[0].title;
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
-        // let endTime = this.state.duration !== null ? 
-        //     (this.state.duration / 60).toFixed(2) : 0;
-        //     endTime = endTime.split('.').join(':');
-        let endTime = this.state.duration !== null ? this.state.duration : 0;
+        const endTime = this.state.duration !== null ? this.state.duration : 0;
         return (
             <div className="song__info">
                 <div className="controls">
@@ -152,4 +137,5 @@ function formatTime(time) {
         seconds = 100 - seconds;
         return `${minutes}:${seconds < 10 ? '0' + seconds : seconds }`;
     }
+    return `0:00`;
 }
