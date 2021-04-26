@@ -97,11 +97,12 @@ export default class Play extends React.Component {
     }
 
     manuallyUpdateTime(e) {
-        console.log(this.state.currentTime);
         this.audioRef.current.pause();
-        this.setState({
-            currentTime: e.target.value
-        }, e => console.log(this.state));
+        this.audioRef.current.currentTime = e.target.value;
+        this.audioRef.current.play();
+         this.setState({
+             currentTime: e.target.value
+         }, e => console.log(this.state));
     }
 
     render() {
