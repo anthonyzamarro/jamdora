@@ -84,8 +84,6 @@ code {
 }
 
 .time__duration {
-  height: 5px;
-  background-color: #fff;
   flex-basis: 300px;
   margin: 12px;
 }
@@ -96,9 +94,21 @@ code {
 
 .duration__elapsed {
   position: absolute;
-  width: 0%;
   background: red;
-  height: 5px;
+  -webkit-appearance: none;
+  left: 0;
+  width: 100%;
+}
+
+.duration__elapsed::-webkit-slider-thumb {
+  -webkit-appearance: none;
+    color: blue;
+    background: blue;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 767px) {

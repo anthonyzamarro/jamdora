@@ -13,6 +13,7 @@ export default class Play extends React.Component {
         this.audioRef = React.createRef();
         this.updateTime = this.updateTime.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
+        this.manuallyUpdateTime = this.manuallyUpdateTime.bind(this);
     }
 
     componentDidMount() {
@@ -95,6 +96,14 @@ export default class Play extends React.Component {
         }
     }
 
+    manuallyUpdateTime(e) {
+        console.log(this.state.currentTime);
+        this.audioRef.current.pause();
+        this.setState({
+            currentTime: e.target.value
+        }, e => console.log(this.state));
+    }
+
     render() {
         const title =  this.props.songToPlay && this.props.songToPlay[0].title;
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
@@ -110,13 +119,17 @@ export default class Play extends React.Component {
                         <div className="time__start"> {
                             `${this.state.minutesElapsed}:${this.state.secondsElapsed < 10 ? '0' + this.state.secondsElapsed : this.state.secondsElapsed}`
                             } </div>
-                        <div className="time__duration duration">
-                           <div 
-                                className="duration__elapsed"
-                                onTimeUpdate={this.updateTime}
-                                style={{width: Math.round(this.state.currentTime)}}
-                           >
-                           </div> 
+                        <div className="time__duration duration"
+                            tabIndex={-1}
+                        >
+                        <input 
+                            type="range" 
+                            min={0} 
+                            defaultValue={this.state.currentTime} 
+                            max={endTime} 
+                            className="duration__elapsed"
+                            onChange={this.manuallyUpdateTime}
+                        />
                         </div>
                         <div className="time__end"> {formatTime(endTime)} </div>
                     </div>
@@ -139,3 +152,13 @@ function formatTime(time) {
     }
     return `0:00`;
 }
+
+
+
+
+{/* <div 
+className="duration__elapsed"
+onTimeUpdate={this.updateTime}
+
+style={{width: Math.round(this.state.currentTime)}}
+><span className="duration__drag">O</span></div>  */}
