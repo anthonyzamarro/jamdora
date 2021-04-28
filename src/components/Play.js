@@ -73,17 +73,20 @@ export default class Play extends React.Component {
     }
 
     updateTime() {
-         if (this.state.secondsElapsed >= 59) {
-            this.setState(prevState => {
-                return {
-                    secondsElapsed: -1,
-                    minutesElapsed: prevState.minutesElapsed + 1
-                }
-            });
-        }
-        this.setState(prevState => {
-            return { secondsElapsed: prevState.secondsElapsed + 1 }
-        });
+        this.setState({
+            currentTime: formatTime(this.state.currentTime)
+        })
+        //  if (this.state.secondsElapsed >= 59) {
+        //     this.setState(prevState => {
+        //         return {
+        //             secondsElapsed: -1,
+        //             minutesElapsed: prevState.minutesElapsed + 1
+        //         }
+        //     });
+        // }
+        // this.setState(prevState => {
+        //     return { secondsElapsed: prevState.secondsElapsed + 1 }
+        // });
     }
 
     togglePlay() {
@@ -100,6 +103,8 @@ export default class Play extends React.Component {
         this.audioRef.current.pause();
         this.audioRef.current.currentTime = e.target.value;
         this.audioRef.current.play();
+        const updatedTime = formatTime(e.target.value);
+        console.log(updatedTime);
          this.setState({
              currentTime: e.target.value
          }, e => console.log(this.state));
@@ -118,7 +123,8 @@ export default class Play extends React.Component {
                     <div className="controls__next"> &gt; </div>
                     <div className="controls__time time"> 
                         <div className="time__start"> {
-                            `${this.state.minutesElapsed}:${this.state.secondsElapsed < 10 ? '0' + this.state.secondsElapsed : this.state.secondsElapsed}`
+                        //    `${this.state.minutesElapsed}:${this.state.secondsElapsed < 10 ? '0' + this.state.secondsElapsed : this.state.secondsElapsed}`
+                           `${formatTime(this.state.currentTime)}`
                             } </div>
                         <div className="time__duration duration"
                             tabIndex={-1}
