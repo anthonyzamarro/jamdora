@@ -25,6 +25,10 @@ export default class Play extends React.Component {
         });
     }
 
+    componentWillUnmount() {
+        this.audioRef.current.removeEventListener("timeupdate", () => {});
+      }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         // there's only ever one song to play from clicking play button
         if(this.props.songToPlay !== prevProps.songToPlay) {
@@ -68,13 +72,14 @@ export default class Play extends React.Component {
         }
 
         if (this.state.currentTime !== prevState.currentTime) {
+            console.log(this.state)
             this.updateTime();
         }
     }
 
     updateTime() {
         this.setState({
-            currentTime: formatTime(this.state.currentTime)
+            currentTime: this.state.currentTime
         })
         //  if (this.state.secondsElapsed >= 59) {
         //     this.setState(prevState => {
@@ -103,11 +108,11 @@ export default class Play extends React.Component {
         this.audioRef.current.pause();
         this.audioRef.current.currentTime = e.target.value;
         this.audioRef.current.play();
-        const updatedTime = formatTime(e.target.value);
-        console.log(updatedTime);
-         this.setState({
-             currentTime: e.target.value
-         }, e => console.log(this.state));
+        const updatedTime = formatDurationTime(e.target.value);
+        // console.log(updatedTime);
+        //  this.setState({
+        //      currentTime: e.target.value
+        //  }, e => console.log(this.state));
     }
 
     render() {
@@ -124,7 +129,7 @@ export default class Play extends React.Component {
                     <div className="controls__time time"> 
                         <div className="time__start"> {
                         //    `${this.state.minutesElapsed}:${this.state.secondsElapsed < 10 ? '0' + this.state.secondsElapsed : this.state.secondsElapsed}`
-                           `${formatTime(this.state.currentTime)}`
+                            `${getTime(this.state.currentTime)}`
                             } </div>
                         <div className="time__duration duration"
                             tabIndex={-1}
@@ -138,7 +143,7 @@ export default class Play extends React.Component {
                             onChange={this.manuallyUpdateTime}
                         />
                         </div>
-                        <div className="time__end"> {formatTime(endTime)} </div>
+                        <div className="time__end"> {getTime(endTime)} </div>
                     </div>
                 </div>
                 <p>{title}</p>
@@ -148,17 +153,27 @@ export default class Play extends React.Component {
     }
 }
 
-function formatTime(time) {
-    if (time > 0) {
-        time = (time / 60).toFixed(2);
-        time = time.split('.');
-        let seconds = parseInt(time[1]);
-        let minutes = parseInt(time[0]);
-        seconds = 100 - seconds;
-        return `${minutes}:${seconds < 10 ? '0' + seconds : seconds }`;
+// found nifty timer function from here:
+// https://dev.to/ma5ly/lets-make-a-little-audio-player-in-react-p4p
+// Below is my original one which only really worked for the duration time
+function getTime(time) {
+    if(!isNaN(time)) {
+      return Math.floor(time / 60) + ':' + ('0' + Math.floor(time % 60)).slice(-2)
     }
-    return `0:00`;
-}
+    return '0:00';
+  }
+
+// function formatDurationTime(time) {
+//     if (time > 0) {
+//         time = (time / 60).toFixed(2);
+//         time = time.split('.');
+//         let seconds = parseInt(time[1]);
+//         let minutes = parseInt(time[0]);
+//         seconds = 100 - seconds;
+//         return `${minutes}:${seconds < 10 ? '0' + seconds : seconds }`;
+//     }
+//     return `0:00`;
+// }
 
 
 
