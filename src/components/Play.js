@@ -13,7 +13,7 @@ export default class Play extends React.Component {
         this.togglePlay = this.togglePlay.bind(this);
         this.manuallyUpdateTime = this.manuallyUpdateTime.bind(this);
         this.playNextSong = this.playNextSong.bind(this);
-        this.playpPreviousSong = this.playpPreviousSong.bind(this);
+        // this.playpPreviousSong = this.playpPreviousSong.bind(this);
     }
 
     componentDidMount() {
@@ -71,25 +71,20 @@ export default class Play extends React.Component {
         }
     }
 
-    playNextSong() {
-        const nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
-        if (nextSong !== undefined) {
-            this.setState({
-                currentTime: 0,
-                duration: 1
-            });
-        this.props.nextSong(nextSong.date, nextSong.title);
+    playNextSong(e) {
+        let nextSong;
+        if (e && e.target.id === 'prev') {
+            nextSong = this.props.playList[this.state.currentSongPlayListIndex-1];
         }
-    }
-
-    playpPreviousSong() {
-        const nextSong = this.props.playList[this.state.currentSongPlayListIndex-1];
+         else {
+            nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
+        }
         if (nextSong !== undefined) {
             this.setState({
                 currentTime: 0,
                 duration: 1
             });
-        this.props.nextSong(nextSong.date, nextSong.title);
+            this.props.nextSong(nextSong.date, nextSong.title);
         }
     }
 
@@ -123,9 +118,9 @@ export default class Play extends React.Component {
             <div className="song__info">
                 <div className="controls">
                     <audio ref={this.audioRef} className="controls__play"></audio>
-                    <div className="controls__previous" onClick={this.playpPreviousSong}> &lt; </div>
+                    <div className="controls__previous" onClick={this.playNextSong} id="prev"> &lt; </div>
                     <div className="controls__play" onClick={this.togglePlay}> |&gt; </div>
-                    <div className="controls__next" onClick={this.playNextSong}> &gt; </div>
+                    <div className="controls__next" onClick={this.playNextSong} id="next"> &gt; </div>
                     <div className="controls__time time"> 
                         <div className="time__start"> {
                             `${getTime(this.state.currentTime)}`
