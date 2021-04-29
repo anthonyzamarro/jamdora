@@ -5,9 +5,7 @@ export default class Play extends React.Component {
         super(props);
 
         this.state  = {
-            currentTime: 0,
-            secondsElapsed: 0,
-            minutesElapsed: 0
+            currentTime: 0
         }
 
         this.audioRef = React.createRef();
@@ -32,11 +30,6 @@ export default class Play extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         // there's only ever one song to play from clicking play button
         if(this.props.songToPlay !== prevProps.songToPlay) {
-            this.setState({
-                secondsElapsed: 0,
-                minutesElapsed: 0
-            });
-
             const songToPlay = this.props.songToPlay[0];
             const songSource = this.props.songToPlay !== null ? songToPlay.mp3 : null;
             if (this.audioRef.current) {
@@ -62,9 +55,7 @@ export default class Play extends React.Component {
                  if (nextSong !== undefined) {
                      this.setState({
                          currentTime: 0,
-                         duration: 1,
-                         secondsElapsed: 0,
-                         minutesElapsed: 0
+                         duration: 1
                     });
                     this.props.nextSong(nextSong.date, nextSong.title);
                  }
@@ -72,7 +63,6 @@ export default class Play extends React.Component {
         }
 
         if (this.state.currentTime !== prevState.currentTime) {
-            console.log(this.state)
             this.updateTime();
         }
     }
@@ -81,17 +71,6 @@ export default class Play extends React.Component {
         this.setState({
             currentTime: this.state.currentTime
         })
-        //  if (this.state.secondsElapsed >= 59) {
-        //     this.setState(prevState => {
-        //         return {
-        //             secondsElapsed: -1,
-        //             minutesElapsed: prevState.minutesElapsed + 1
-        //         }
-        //     });
-        // }
-        // this.setState(prevState => {
-        //     return { secondsElapsed: prevState.secondsElapsed + 1 }
-        // });
     }
 
     togglePlay() {
@@ -105,14 +84,9 @@ export default class Play extends React.Component {
     }
 
     manuallyUpdateTime(e) {
-        this.audioRef.current.pause();
-        this.audioRef.current.currentTime = e.target.value;
-        this.audioRef.current.play();
-        const updatedTime = formatDurationTime(e.target.value);
-        // console.log(updatedTime);
-        //  this.setState({
-        //      currentTime: e.target.value
-        //  }, e => console.log(this.state));
+        if (this.audioRef.current.src !== "") {
+            this.audioRef.current.currentTime = e.target.value;
+        }
     }
 
     render() {
@@ -128,7 +102,6 @@ export default class Play extends React.Component {
                     <div className="controls__next"> &gt; </div>
                     <div className="controls__time time"> 
                         <div className="time__start"> {
-                        //    `${this.state.minutesElapsed}:${this.state.secondsElapsed < 10 ? '0' + this.state.secondsElapsed : this.state.secondsElapsed}`
                             `${getTime(this.state.currentTime)}`
                             } </div>
                         <div className="time__duration duration"
@@ -174,13 +147,3 @@ function getTime(time) {
 //     }
 //     return `0:00`;
 // }
-
-
-
-
-{/* <div 
-className="duration__elapsed"
-onTimeUpdate={this.updateTime}
-
-style={{width: Math.round(this.state.currentTime)}}
-><span className="duration__drag">O</span></div>  */}
