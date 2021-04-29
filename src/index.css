@@ -103,13 +103,13 @@ code {
 
 .duration__elapsed::-webkit-slider-thumb {
   -webkit-appearance: none;
-    color: blue;
-    background: blue;
-    -webkit-appearance: none;
-    appearance: none;
-    width: 8px;
-    height: 10px;
-    cursor: pointer;
+  color: blue;
+  background: blue;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 10px;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 767px) {

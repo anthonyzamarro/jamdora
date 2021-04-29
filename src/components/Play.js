@@ -12,6 +12,8 @@ export default class Play extends React.Component {
         this.updateTime = this.updateTime.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
         this.manuallyUpdateTime = this.manuallyUpdateTime.bind(this);
+        this.playNextSong = this.playNextSong.bind(this);
+        this.playpPreviousSong = this.playpPreviousSong.bind(this);
     }
 
     componentDidMount() {
@@ -51,19 +53,43 @@ export default class Play extends React.Component {
         if (this.state && this.state.currentTime !== undefined && this.state.currentTime === this.state.duration) {
             this.audioRef.current.pause();
             if (this.props.playList.length > 0) {
-                const nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
-                 if (nextSong !== undefined) {
-                     this.setState({
-                         currentTime: 0,
-                         duration: 1
-                    });
-                    this.props.nextSong(nextSong.date, nextSong.title);
-                 }
+                this.playNextSong();
+                // console.log(this.state.currentSongPlayListIndex);
+                // const nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
+                //  if (nextSong !== undefined) {
+                //      this.setState({
+                //          currentTime: 0,
+                //          duration: 1
+                //     });
+                //     this.props.nextSong(nextSong.date, nextSong.title);
+                //  }
             }
         }
 
         if (this.state.currentTime !== prevState.currentTime) {
             this.updateTime();
+        }
+    }
+
+    playNextSong() {
+        const nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
+        if (nextSong !== undefined) {
+            this.setState({
+                currentTime: 0,
+                duration: 1
+            });
+        this.props.nextSong(nextSong.date, nextSong.title);
+        }
+    }
+
+    playpPreviousSong() {
+        const nextSong = this.props.playList[this.state.currentSongPlayListIndex-1];
+        if (nextSong !== undefined) {
+            this.setState({
+                currentTime: 0,
+                duration: 1
+            });
+        this.props.nextSong(nextSong.date, nextSong.title);
         }
     }
 
@@ -97,9 +123,9 @@ export default class Play extends React.Component {
             <div className="song__info">
                 <div className="controls">
                     <audio ref={this.audioRef} className="controls__play"></audio>
-                    <div className="controls__previous"> &lt; </div>
+                    <div className="controls__previous" onClick={this.playpPreviousSong}> &lt; </div>
                     <div className="controls__play" onClick={this.togglePlay}> |&gt; </div>
-                    <div className="controls__next"> &gt; </div>
+                    <div className="controls__next" onClick={this.playNextSong}> &gt; </div>
                     <div className="controls__time time"> 
                         <div className="time__start"> {
                             `${getTime(this.state.currentTime)}`
