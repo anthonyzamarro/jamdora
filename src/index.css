@@ -27,9 +27,6 @@ code {
   width: 100%;
 }
 
-.song__info {
-  min-height: 50px;
-}
 .songs__all {
   width: 40%;
   display: inline-block;
@@ -63,6 +60,11 @@ code {
   height: 100px;
 }
 
+header {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 
 /*
   Controls
@@ -73,6 +75,8 @@ code {
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
+  flex: 1;
+  order: 2;
 }
 
 .time {
@@ -80,7 +84,8 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  order: -1;
+  order: 1;
+  flex: initial;
 }
 
 .time__duration {
@@ -112,17 +117,31 @@ code {
   cursor: pointer;
 }
 
+.song__info {
+  min-height: 50px;
+  flex: 1;
+  order: 0;
+}
+
 @media screen and (min-width: 767px) {
   .container {
     width: 33%;
   }
+
   
   .controls {
     flex-wrap: nowrap;
+    order: 0;
   }
 
   .time {
     width: 20%;
-    order:initial;
+    order:1;
+    flex: 1;
   }
+
+  .song__info {
+    order:2;
+  }
+
 }

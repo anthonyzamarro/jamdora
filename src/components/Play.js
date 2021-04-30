@@ -115,13 +115,14 @@ export default class Play extends React.Component {
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
         const endTime = this.state.duration !== null ? this.state.duration : 0;
         return (
-            <div className="song__info">
-                <div className="controls">
+            <header>
+               <div className="controls">
                     <audio ref={this.audioRef} className="controls__play"></audio>
                     <div className="controls__previous" onClick={this.playNextSong} id="prev"> &lt; </div>
                     <div className="controls__play" onClick={this.togglePlay}> |&gt; </div>
                     <div className="controls__next" onClick={this.playNextSong} id="next"> &gt; </div>
-                    <div className="controls__time time"> 
+                </div>
+               <div className="time"> 
                         <div className="time__start"> {
                             `${getTime(this.state.currentTime)}`
                             } </div>
@@ -139,10 +140,11 @@ export default class Play extends React.Component {
                         </div>
                         <div className="time__end"> {getTime(endTime)} </div>
                     </div>
+               <div className="song__info">
+                    <p>{title}</p>
+                    <p>{date}</p>
                 </div>
-                <p>{title}</p>
-                <p>{date}</p>
-            </div>
+            </header>
         )
     }
 }

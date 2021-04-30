@@ -56,6 +56,8 @@ export default class Fetch extends React.Component {
 	render() {
 		return (
 			<>
+			
+				<div className="logo">Jamdora</div>
 				<Play 
 					songToPlay={this.state.songVersion}
 					playList={this.state.playList}
