@@ -11,6 +11,16 @@ export default class PlayList extends React.Component {
         this.playSong = this.playSong.bind(this);
         this.removeFromPlayList = this.removeFromPlayList.bind(this);
     }
+
+     componentDidUpdate(prevProps, prevState) {
+         if (prevProps.addedFromClick !== this.props.addedFromClick) {
+            this.setState({
+                playList: this.state.playList.concat(this.props.addedFromClick)
+            }, e => {
+                this.props.addToPlayList(this.state.playList);
+            });
+        }
+     }
     
     playSong(e) {
         this.props.chosenVersion(e.target.dataset.date, e.target.dataset.title);

@@ -14,7 +14,8 @@ export default class Fetch extends React.Component {
 			selectSongId: null,
 			selectSongTitle: null,
 			songVersion: null,
-			playList: []
+			playList: [],
+			addedFromClick: []
 		}
 	}
 
@@ -27,9 +28,15 @@ export default class Fetch extends React.Component {
 
 	updatePlayList(songs) {
 		this.setState({
-			playList: songs
+			playList: this.state.playList.concat(songs)
+		}, e => console.log(this.state.playList));
+	}
+	
+	addedFromClick(songs) {
+		this.setState({
+			addedFromClick: [...songs]
 		});
-	}	
+	}
 
     selectSongIdHandler(songId, songName) {
         this.setState({
@@ -43,20 +50,20 @@ export default class Fetch extends React.Component {
 									headers: {
 									Authorization: `Bearer ${process.env.REACT_APP_PHISH_IN_KEY}`
 								}
-							})
+							}).catch(err => console.log(err))
 		const json	= await showDate.json();
 
 
 		const songVersion = json.data.tracks.filter(song => song.title === songTitle);
 		this.setState({
 			songVersion: songVersion
-		})
+		});
 	}
 
 	render() {
 		return (
 			<>
-			
+
 				<div className="logo">Jamdora</div>
 				<Play 
 					songToPlay={this.state.songVersion}
@@ -67,10 +74,8 @@ export default class Fetch extends React.Component {
 					<h2>Search for Song</h2>
 						{
 						this.state.loading || !this.state.songs ?
-							
 							<p>Loading...</p>
 						:
-
 							<SearchForSong 
 								songList={this.state.songs} 
 								chosenSong={(i, s) => this.selectSongIdHandler(i, s)}	
@@ -80,15 +85,20 @@ export default class Fetch extends React.Component {
 
 				<div className="container">
 					<FetchMarkedSong 
-						markedSongId={this.state.selectSongId} 
-						markedSongTitle={this.state.selectSongTitle} 
+						markedSongId={this.state.selectSongId}
+						markedSongTitle={this.state.selectSongTitle}
+						// updates when user has clicked on song
+						addedFromClick={(e) => this.addedFromClick(e)}
 					/>
 				</div>
 
 				<div className="container">
 					<PlayList
 						chosenVersion={(showDate, songTitle) => this.selectedSongVersion(showDate, songTitle)}
-						addToPlayList={(e) => this.updatePlayList(e) }
+						// pass clicked song from parent to component
+						addedFromClick={this.state.addedFromClick}
+						// updates when song has been dropped
+						addToPlayList={e => this.updatePlayList(e)}
 					/>
 				</div>
 			</>

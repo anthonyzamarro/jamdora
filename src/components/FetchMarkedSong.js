@@ -9,6 +9,7 @@ export default class FetchMarkedSong extends React.Component {
         }
 
         this.onDragHandler = this.onDragHandler.bind(this);
+        this.onClickHandler = this.onClickHandler.bind(this);
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -47,9 +48,14 @@ export default class FetchMarkedSong extends React.Component {
         })
     }
 
-    // onClickHandler(songInfo, songTitle) {
-    //     this.props.chosenVersion(songInfo, songTitle)
-    // }
+    onClickHandler(e) {
+        const songInfo = [{
+            date: e.target.parentNode.dataset.date,
+            title: e.target.parentNode.dataset.title,
+            text: e.target.parentNode.textContent,
+        }];
+        this.props.addedFromClick(songInfo);
+    }
    
     onDragHandler(e) {
         e.dataTransfer.setData('text/plain', e.target.textContent);
@@ -69,12 +75,13 @@ export default class FetchMarkedSong extends React.Component {
                            <div
                                 key={idx}
                                 onDragStart={this.onDragHandler}
+                                onClick={this.onClickHandler}
                                 draggable="true"
                                 data-title={this.props.markedSongTitle}
                                 data-date={marked.showdate}
                             >
-                                <p>{marked.showdate}</p>
-                                <p>{marked.venue} <span> &nbsp; {marked.location} </span></p>
+                                
+                                <p>{marked.showdate} <br></br>{marked.venue} <span> &nbsp; {marked.location} </span></p>
                            </div>
                         )
                     })

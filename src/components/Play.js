@@ -29,7 +29,7 @@ export default class Play extends React.Component {
         this.audioRef.current.removeEventListener("timeupdate", () => {});
       }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps, prevState) {
         // there's only ever one song to play from clicking play button
         if(this.props.songToPlay !== prevProps.songToPlay) {
             const songToPlay = this.props.songToPlay[0];
