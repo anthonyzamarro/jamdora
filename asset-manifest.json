@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/jamdora/static/css/main.1b46b788.chunk.css",
+    "main.js": "/jamdora/static/js/main.a6e5aa3e.chunk.js",
+    "main.js.map": "/jamdora/static/js/main.a6e5aa3e.chunk.js.map",
+    "runtime-main.js": "/jamdora/static/js/runtime-main.d0a5ee70.js",
+    "runtime-main.js.map": "/jamdora/static/js/runtime-main.d0a5ee70.js.map",
+    "static/js/2.63a417f4.chunk.js": "/jamdora/static/js/2.63a417f4.chunk.js",
+    "static/js/2.63a417f4.chunk.js.map": "/jamdora/static/js/2.63a417f4.chunk.js.map",
+    "static/js/3.60ae308c.chunk.js": "/jamdora/static/js/3.60ae308c.chunk.js",
+    "static/js/3.60ae308c.chunk.js.map": "/jamdora/static/js/3.60ae308c.chunk.js.map",
+    "index.html": "/jamdora/index.html",
+    "static/css/main.1b46b788.chunk.css.map": "/jamdora/static/css/main.1b46b788.chunk.css.map",
+    "static/js/2.63a417f4.chunk.js.LICENSE.txt": "/jamdora/static/js/2.63a417f4.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d0a5ee70.js",
+    "static/js/2.63a417f4.chunk.js",
+    "static/css/main.1b46b788.chunk.css",
+    "static/js/main.a6e5aa3e.chunk.js"
+  ]
+}
