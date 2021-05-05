@@ -27,7 +27,7 @@ export default class Play extends React.Component {
 
     componentWillUnmount() {
         this.audioRef.current.removeEventListener("timeupdate", () => {});
-      }
+    }
 
     componentDidUpdate(prevProps, prevState) {
         // there's only ever one song to play from clicking play button
@@ -132,7 +132,7 @@ export default class Play extends React.Component {
                         <input 
                             type="range" 
                             min={0} 
-                            defaultValue={this.state.currentTime} 
+                            value={this.state.currentTime}
                             max={endTime} 
                             className="duration__elapsed"
                             onChange={this.manuallyUpdateTime}
