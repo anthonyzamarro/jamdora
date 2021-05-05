@@ -20,7 +20,11 @@ export default class Fetch extends React.Component {
 	}
 
 	async componentDidMount() {
-		const allSongs = await fetch(`https://api.phish.net/v3/jamcharts/all?apikey=${process.env.REACT_APP_PHISH_NET_KEY}`)
+		const allSongs = await fetch(`https://api.phish.net/v3/jamcharts/all?apikey=${process.env.REACT_APP_PHISH_NET_KEY}`, {
+			method: 'POST',
+			mode: 'no-cors'
+		}).then(res => res.json())
+		  .catch(err => console.log(err));
 		const json = await allSongs.json()
 
 		this.setState({ songs: json.response.data, loading: false });
