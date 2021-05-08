@@ -77,6 +77,7 @@ export default class PlayList extends React.Component {
                                     <span>{info.title}</span> 
                                         {info.text} 
                                         <span 
+                                            className="btn btn-play"
                                             data-title={info.title}
                                             data-date={info.date}
                                             data-text={info.text}

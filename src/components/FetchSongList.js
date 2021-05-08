@@ -55,7 +55,7 @@ export default class Fetch extends React.Component {
     }
 
 	selectedSongVersion = async (song) => {
-		const showDate = await fetch(`http://phish.in/api/v1/shows/${song.date}`, {
+		const showDate = await fetch(`https://phish.in/api/v1/shows/${song.date}`, {
 									method: 'GET',
 									headers: {
 									Authorization: `Bearer ${process.env.REACT_APP_PHISH_IN_KEY}`,
