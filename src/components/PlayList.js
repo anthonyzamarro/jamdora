@@ -23,7 +23,12 @@ export default class PlayList extends React.Component {
      }
     
     playSong(e) {
-        this.props.chosenVersion(e.target.dataset.date, e.target.dataset.title);
+        const chosenSong = {
+            date: e.target.dataset.date,
+            title: e.target.dataset.title,
+            text: e.target.dataset.text
+        }
+        this.props.chosenVersion(chosenSong);
     }
 
     removeFromPlayList(e) {
@@ -65,6 +70,7 @@ export default class PlayList extends React.Component {
 
                     {
                         this.state.playList.map((info, index) => {
+                            console.log(info);
                             return (
                                 <p key={index}>
                                     <span onClick={this.removeFromPlayList} id={index}>X Remove&nbsp; </span>
@@ -72,7 +78,8 @@ export default class PlayList extends React.Component {
                                         {info.text} 
                                         <span 
                                             data-title={info.title}
-                                            data-date={info.date} 
+                                            data-date={info.date}
+                                            data-text={info.text}
                                             onClick={this.playSong}>&nbsp; Play &gt;
                                         </span>
                                     </p>

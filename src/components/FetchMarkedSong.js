@@ -1,5 +1,5 @@
 import React from 'react';
-//import unslug from '../utils/unslug.js';
+import fetchJsonp from 'fetch-jsonp';
 
 export default class FetchMarkedSong extends React.Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class FetchMarkedSong extends React.Component {
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
-		const markedSongs = await fetch(`https://api.phish.net/v3/jamcharts/get?apikey=${process.env.REACT_APP_PHISH_NET_KEY}&songid=${this.props.markedSongId}`)
+		const markedSongs = await fetchJsonp(`https://api.phish.net/v3/jamcharts/get?apikey=${process.env.REACT_APP_PHISH_NET_KEY}&songid=${this.props.markedSongId}`)
 		const json = await markedSongs.json()
         
         if (this.props.markedSongId !== prevProps.markedSongId) {
@@ -31,7 +31,7 @@ export default class FetchMarkedSong extends React.Component {
         // i have to make another request for this information.
         // the second async call results in an array of promises, which all need to resolve
         const markedRecommended = await Promise.all(markedFiltered.map(async song => {
-           const fetchShow = await fetch(`https://api.phish.net/v3/shows/query?apikey=${process.env.REACT_APP_PHISH_NET_KEY}&showids=${song.showid}&order=ASC`);
+           const fetchShow = await fetchJsonp(`https://api.phish.net/v3/shows/query?apikey=${process.env.REACT_APP_PHISH_NET_KEY}&showids=${song.showid}&order=ASC`);
             const show = await fetchShow.json();
 
             return {

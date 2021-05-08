@@ -4,6 +4,7 @@ import FetchMarkedSong from './FetchMarkedSong';
 import Play from './Play'
 import SearchForSong from './SearchForSong';
 import PlayList from './PlayList';
+import fetchJsonp from 'fetch-jsonp'
 
 
 export default class Fetch extends React.Component {
@@ -20,11 +21,15 @@ export default class Fetch extends React.Component {
 	}
 
 	async componentDidMount() {
-		const allSongs = await fetch(`https://api.phish.net/v3/jamcharts/all?apikey=${process.env.REACT_APP_PHISH_NET_KEY}`, {
+		const allSongs = await fetchJsonp(`https://api.phish.net/v3/jamcharts/all?apikey=${process.env.REACT_APP_PHISH_NET_KEY}`, {
 			method: 'POST',
-			mode: 'no-cors'
-		}).then(res => res.json())
-		  .catch(err => console.log(err));
+			timeout: 3000,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+		}).catch(err => console.error(err));
+
 		const json = await allSongs.json()
 
 		this.setState({ songs: json.response.data, loading: false });
@@ -49,19 +54,26 @@ export default class Fetch extends React.Component {
         })
     }
 
-	selectedSongVersion = async (showdate, songTitle) => {
-		const showDate = await fetch(`http://phish.in/api/v1/shows/${showdate}`, {
+	selectedSongVersion = async (song) => {
+		const showDate = await fetch(`http://phish.in/api/v1/shows/${song.date}`, {
+									method: 'GET',
 									headers: {
-									Authorization: `Bearer ${process.env.REACT_APP_PHISH_IN_KEY}`
+									Authorization: `Bearer ${process.env.REACT_APP_PHISH_IN_KEY}`,
+									'Accept': 'application/json'
 								}
-							}).catch(err => console.log(err))
+							})
+							.catch(err => console.error(err));
+							console.log(showDate)
 		const json	= await showDate.json();
 
+		if (json.success) {
+			
+			const songVersion = json.data.tracks.filter(fetchedSong => fetchedSong.title === song.title);
+			this.setState({
+				songVersion: songVersion
+			});
+		}
 
-		const songVersion = json.data.tracks.filter(song => song.title === songTitle);
-		this.setState({
-			songVersion: songVersion
-		});
 	}
 
 	render() {
@@ -98,7 +110,7 @@ export default class Fetch extends React.Component {
 
 				<div className="container">
 					<PlayList
-						chosenVersion={(showDate, songTitle) => this.selectedSongVersion(showDate, songTitle)}
+						chosenVersion={(song) => this.selectedSongVersion(song)}
 						// pass clicked song from parent to component
 						addedFromClick={this.state.addedFromClick}
 						// updates when song has been dropped
