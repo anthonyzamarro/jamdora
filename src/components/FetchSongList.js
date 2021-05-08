@@ -63,7 +63,6 @@ export default class Fetch extends React.Component {
 								}
 							})
 							.catch(err => console.error(err));
-							console.log(showDate)
 		const json	= await showDate.json();
 
 		if (json.success) {

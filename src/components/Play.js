@@ -9,7 +9,7 @@ export default class Play extends React.Component {
         }
 
         this.audioRef = React.createRef();
-        this.updateTime = this.updateTime.bind(this);
+        // this.updateTime = this.updateTime.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
         this.manuallyUpdateTime = this.manuallyUpdateTime.bind(this);
         this.playNextSong = this.playNextSong.bind(this);
@@ -113,6 +113,8 @@ export default class Play extends React.Component {
     render() {
         const title =  this.props.songToPlay && this.props.songToPlay[0].title;
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
+        const venueName  =  this.props.songToPlay && this.props.songToPlay[0].venue_name;
+        const venueLocation  =  this.props.songToPlay && this.props.songToPlay[0].venue_location;
         const endTime = this.state.duration !== null ? this.state.duration : 0;
         return (
             <header>
@@ -143,6 +145,7 @@ export default class Play extends React.Component {
                <div className="song__info">
                     <p>{title}</p>
                     <p>{date}</p>
+                    <p>{venueName, venueLocation}</p>
                 </div>
             </header>
         )
