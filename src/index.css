@@ -7,9 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+ul {
+  padding: 0;
 }
 
 .App {
@@ -40,7 +39,7 @@ code {
 
 .dropdown {
   display: none;
-  width: 400px;
+  width: 200px;
   max-height: 200px;
   overflow: scroll;
   margin: auto;
@@ -133,6 +132,9 @@ header {
     width: 33%;
   }
 
+  .dropdown {
+    width: 300px;
+  }
   
   .controls {
     flex-wrap: nowrap;

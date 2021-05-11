@@ -54,21 +54,15 @@ export default class Play extends React.Component {
             this.audioRef.current.pause();
             if (this.props.playList.length > 0) {
                 this.playNextSong();
-                // console.log(this.state.currentSongPlayListIndex);
-                // const nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
-                //  if (nextSong !== undefined) {
-                //      this.setState({
-                //          currentTime: 0,
-                //          duration: 1
-                //     });
-                //     this.props.nextSong(nextSong.date, nextSong.title);
-                //  }
             }
         }
 
         if (this.state.currentTime !== prevState.currentTime) {
-            this.updateTime();
-        }
+//            this.updateTime();
+            this.setState({
+                currentTime: this.state.currentTime
+            })
+    }
     }
 
     playNextSong(e) {
@@ -76,15 +70,16 @@ export default class Play extends React.Component {
         if (e && e.target.id === 'prev') {
             nextSong = this.props.playList[this.state.currentSongPlayListIndex-1];
         }
-         else {
+        else {
             nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
         }
+        
         if (nextSong !== undefined) {
             this.setState({
                 currentTime: 0,
                 duration: 1
-            });
-            this.props.nextSong(nextSong.date, nextSong.title);
+            }); 
+            this.props.nextSong(nextSong);
         }
     }
 
