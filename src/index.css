@@ -48,8 +48,8 @@ header {
 
 .dropdown {
   display: none;
-  width: 200px;
-  max-height: 200px;
+  width: cacl(100% - 15px);
+  max-height: 300px;
   overflow: scroll;
   margin: auto;
   background: gray;
@@ -140,11 +140,7 @@ header {
   .container {
     width: 33%;
   }
-
-  .dropdown {
-    width: 400px;
-  }
-
+  
   .controls {
     flex-wrap: nowrap;
     order: 0;
