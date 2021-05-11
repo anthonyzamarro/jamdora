@@ -1,3 +1,6 @@
+/*
+  General
+*/
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -26,14 +29,20 @@ ul {
   width: 100%;
 }
 
+header {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*
+  Song Search Input/Dropdown
+*/
 .songs__all {
-  width: 40%;
   display: inline-block;
   vertical-align: top;
 }
 
 .song__marked {
-  width: 40%;
   display: inline-block;
 }
 
@@ -55,25 +64,10 @@ ul {
   list-style: none;
 }
 
-.playlist__zone {
-  height: 100px;
-}
-
-header {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-
-.btn-play {
-  cursor: pointer;
-}
-
 
 /*
   Controls
 */
-
 .controls {
   display: flex;
   align-items: center;
@@ -81,6 +75,10 @@ header {
   flex-wrap: wrap;
   flex: 1;
   order: 2;
+}
+
+.btn-play {
+  cursor: pointer;
 }
 
 .time {
@@ -127,15 +125,26 @@ header {
   order: 0;
 }
 
+/*
+  Play List
+*/
+.playlist {
+  height: 100vh;
+}
+
+.playlist__zone {
+  height: 100%;
+}
+
 @media screen and (min-width: 767px) {
   .container {
     width: 33%;
   }
 
   .dropdown {
-    width: 300px;
+    width: 400px;
   }
-  
+
   .controls {
     flex-wrap: nowrap;
     order: 0;
