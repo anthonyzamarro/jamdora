@@ -70,7 +70,6 @@ export default class PlayList extends React.Component {
 
                     {
                         this.state.playList.map((info, index) => {
-                            console.log(info);
                             return (
                                 <p key={index}>
                                     <span onClick={this.removeFromPlayList} id={index}>X Remove&nbsp; </span>

@@ -74,14 +74,13 @@ export default class FetchMarkedSong extends React.Component {
                         return (
                            <div
                                 key={idx}
-                                
-                                onClick={this.onClickHandler}
+                                onDragStart={this.onDragHandler}
                                 draggable="true"
                                 data-title={this.props.markedSongTitle}
                                 data-date={marked.showdate}
                             >
                             <p 
-                                onDragStart={this.onDragHandler}>
+                                onClick={this.onClickHandler}>
                                     {marked.showdate}<br/>&nbsp;{marked.venue}<br/>&nbsp; {marked.location}</p>
                            </div>
                         )
