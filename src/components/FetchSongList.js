@@ -36,12 +36,14 @@ export default class Fetch extends React.Component {
 	}	
 
 	updatePlayList(songs) {
+		console.log(songs);
 		this.setState({
 			playList: this.state.playList.concat(songs)
 		}, e => console.log(this.state.playList));
 	}
 	
 	addedFromClick(songs) {
+		console.log(songs);
 		this.setState({
 			addedFromClick: [...songs]
 		});
