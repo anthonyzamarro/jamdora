@@ -5,9 +5,9 @@ function App() {
     <div className="App">
       <FetchSongList />
 
-      <footer>
+      {/* <footer>
         <h1>Jamdora</h1>
-      </footer>
+      </footer> */}
     </div>
   );
 }
