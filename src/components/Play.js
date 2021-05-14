@@ -73,7 +73,7 @@ export default class Play extends React.Component {
         else {
             nextSong = this.props.playList[this.state.currentSongPlayListIndex+1];
         }
-        
+
         if (nextSong !== undefined) {
             this.setState({
                 currentTime: 0,
@@ -113,6 +113,7 @@ export default class Play extends React.Component {
         const endTime = this.state.duration !== null ? this.state.duration : 0;
         return (
             <header>
+               <div className="logo">Jamdora</div>
                <div className="controls">
                     <audio ref={this.audioRef} className="controls__play"></audio>
                     <div className="controls__previous" onClick={this.playNextSong} id="prev"> &lt; </div>
