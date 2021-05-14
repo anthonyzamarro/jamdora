@@ -30,8 +30,26 @@ h2 {
   min-height: 100vh;
   background: var(--bg-color);
   color: #fff;
-  /* display: grid; */
   text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+      "header header header header"
+      "search . . playlist"
+      "marked . . .";
+}
+
+.search-song__container {
+  grid-area: search;
+}
+
+.marked-song__container {
+  grid-area: marked;
+}
+
+.playlist__container {
+  grid-area: playlist;
 }
 
 .container {

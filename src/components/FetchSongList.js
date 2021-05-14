@@ -98,7 +98,7 @@ export default class Fetch extends React.Component {
 						}
 				</div>	
 
-				<div className="container">
+				<div className="marked-song__container container">
 					<FetchMarkedSong 
 						markedSongId={this.state.selectSongId}
 						markedSongTitle={this.state.selectSongTitle}
@@ -107,7 +107,7 @@ export default class Fetch extends React.Component {
 					/>
 				</div>
 
-				<div className="container">
+				<div className="playlist__container container">
 					<PlayList
 						chosenVersion={(song) => this.selectedSongVersion(song)}
 						// pass clicked song from parent to component
