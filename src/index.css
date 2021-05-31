@@ -32,36 +32,30 @@ h2 {
   color: #fff;
   text-align: center;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto;
   grid-template-rows: auto;
-  grid-template-areas:
-      "header header header header"
-      "search . . playlist"
-      "marked . . .";
+  grid-template-areas: "center";
 }
 
-.search-song__container {
-  grid-area: search;
-}
-
-.marked-song__container {
-  grid-area: marked;
-}
-
-.playlist__container {
-  grid-area: playlist;
-}
-
-.container {
+/* .container {
   display: inline-block;
   vertical-align: top;
   width: 100%;
-}
+} */
 
 header {
   display: flex;
   flex-wrap: wrap;
 }
+/* 
+header,
+.search-song__container,
+.marked-song__container,
+.playlist__container {
+  grid-column: auto;
+  grid-row: auto;
+  grid-area: search;
+} */
 
 /*
   Song Search Input/Dropdown
@@ -166,8 +160,42 @@ header {
 }
 
 @media screen and (min-width: 767px) {
-  .container {
-    width: 33%;
+  .App {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 50px 200px 100vh;
+    grid-template-areas:
+      "header header header header"
+      "search . . playlist"
+      "marked . . .";
+  }
+
+  header {
+    grid-area: header;
+  }
+
+  .search-song__container {
+    grid-area: search;
+  }
+  
+  .marked-song__container {
+    grid-area: marked;
+  }
+  
+  .playlist__container {
+    grid-area: playlist;
+  }
+
+  header {
+    grid-column: 1 / span 4;
+  }
+  
+  .search-song__container,
+  .marked-song__container {
+    grid-column: 1;
+  }
+  
+  .playlist__container {
+    grid-column: 3;
   }
 
   .controls {
