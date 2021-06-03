@@ -5,6 +5,7 @@ import Play from './Play'
 import SearchForSong from './SearchForSong';
 import PlayList from './PlayList';
 import fetchJsonp from 'fetch-jsonp'
+import SongInfo from './SongInfo';
 
 
 export default class Fetch extends React.Component {
@@ -77,6 +78,12 @@ export default class Fetch extends React.Component {
 
 	}
 
+	currentSongInfo(songInfo) {
+		this.setState({
+			playingSongInfo: songInfo
+		});
+	}
+
 	render() {
 		return (
 			<>
@@ -84,7 +91,9 @@ export default class Fetch extends React.Component {
 					songToPlay={this.state.songVersion}
 					playList={this.state.playList}
 					nextSong={this.selectedSongVersion}
+					currentSongInfo={this.currentSongInfo}
 				/>
+				<SongInfo currentSong={this.playingSongInfo}/>
 				<div className="search-song__container container">
 					<h2>Search for Song</h2>
 						{

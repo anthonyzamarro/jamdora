@@ -9,11 +9,9 @@ export default class Play extends React.Component {
         }
 
         this.audioRef = React.createRef();
-        // this.updateTime = this.updateTime.bind(this);
         this.togglePlay = this.togglePlay.bind(this);
         this.manuallyUpdateTime = this.manuallyUpdateTime.bind(this);
         this.playNextSong = this.playNextSong.bind(this);
-        // this.playpPreviousSong = this.playpPreviousSong.bind(this);
     }
 
     componentDidMount() {
@@ -58,11 +56,10 @@ export default class Play extends React.Component {
         }
 
         if (this.state.currentTime !== prevState.currentTime) {
-//            this.updateTime();
             this.setState({
                 currentTime: this.state.currentTime
             })
-    }
+        }
     }
 
     playNextSong(e) {
@@ -105,6 +102,10 @@ export default class Play extends React.Component {
         }
     }
 
+    passUpSongInfo(info) {
+        this.props.currenSongInfo(info);
+    }
+
     render() {
         const title =  this.props.songToPlay && this.props.songToPlay[0].title;
         const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
@@ -138,7 +139,7 @@ export default class Play extends React.Component {
                         </div>
                         <div className="time__end"> {getTime(endTime)} </div>
                     </div>
-               <div className="song__info">
+               <div className="song__info" passUpSongInfo={[title, date, venueName, venueLocation]}>
                     <p>{title}</p>
                     <p>{date}</p>
                     <p>{venueName, venueLocation}</p>

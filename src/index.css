@@ -76,6 +76,8 @@ header,
   overflow: scroll;
   margin: auto;
   background: gray;
+  position: relative;
+  z-index: 2;
 }
 
 .dropdown.active {
@@ -179,6 +181,7 @@ header,
   
   .marked-song__container {
     grid-area: marked;
+    overflow: auto;
   }
   
   .playlist__container {
