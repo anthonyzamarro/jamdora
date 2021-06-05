@@ -39,9 +39,7 @@ export default class Fetch extends React.Component {
 	updatePlayList(songs) {
 		this.setState({
 			playList: [...songs]
-		}
-		//, e => console.log(this.state.playList)
-		);
+		});
 	}
 	
 	addedFromClick(songs) {
@@ -78,7 +76,7 @@ export default class Fetch extends React.Component {
 
 	}
 
-	currentSongInfo(songInfo) {
+	passCurrentSong(songInfo) {
 		this.setState({
 			playingSongInfo: songInfo
 		});
@@ -91,9 +89,9 @@ export default class Fetch extends React.Component {
 					songToPlay={this.state.songVersion}
 					playList={this.state.playList}
 					nextSong={this.selectedSongVersion}
-					currentSongInfo={this.currentSongInfo}
+					currentSongInfo={e => this.passCurrentSong(e)}
 				/>
-				<SongInfo currentSong={this.playingSongInfo}/>
+				<SongInfo currentSong={this.state.playingSongInfo}/>
 				<div className="search-song__container container">
 					<h2>Search for Song</h2>
 						{

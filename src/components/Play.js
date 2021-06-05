@@ -12,6 +12,7 @@ export default class Play extends React.Component {
         this.togglePlay = this.togglePlay.bind(this);
         this.manuallyUpdateTime = this.manuallyUpdateTime.bind(this);
         this.playNextSong = this.playNextSong.bind(this);
+        this.passUpSongInfo = this.passUpSongInfo.bind(this);
     }
 
     componentDidMount() {
@@ -37,6 +38,14 @@ export default class Play extends React.Component {
                 this.audioRef.current.src = songSource;
                 this.audioRef.current.load(); 
                 this.audioRef.current.play();
+
+                this.props.currentSongInfo(
+                    {
+                     title: this.props.songToPlay[0].title, 
+                     date: this.props.songToPlay[0].show_date, 
+                     venueName: this.props.songToPlay[0].venue_name, 
+                     venueLocation: this.props.songToPlay[0].venue_location}
+                    );
             }
 
             this.props.playList.findIndex((s, i)=> {
@@ -58,7 +67,7 @@ export default class Play extends React.Component {
         if (this.state.currentTime !== prevState.currentTime) {
             this.setState({
                 currentTime: this.state.currentTime
-            })
+            });
         }
     }
 
@@ -103,15 +112,16 @@ export default class Play extends React.Component {
     }
 
     passUpSongInfo(info) {
-        this.props.currenSongInfo(info);
+        // this.props.currentSongInfo(info);
     }
 
     render() {
-        const title =  this.props.songToPlay && this.props.songToPlay[0].title;
-        const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
-        const venueName  =  this.props.songToPlay && this.props.songToPlay[0].venue_name;
-        const venueLocation  =  this.props.songToPlay && this.props.songToPlay[0].venue_location;
+        // const title =  this.props.songToPlay && this.props.songToPlay[0].title;
+        // const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
+        // const venueName  =  this.props.songToPlay && this.props.songToPlay[0].venue_name;
+        // const venueLocation  =  this.props.songToPlay && this.props.songToPlay[0].venue_location;
         const endTime = this.state.duration !== null ? this.state.duration : 0;
+        // this.passUpSongInfo([title, date, venueName, venueLocation])
         return (
             <header>
                <div className="logo">Jamdora</div>
@@ -139,11 +149,7 @@ export default class Play extends React.Component {
                         </div>
                         <div className="time__end"> {getTime(endTime)} </div>
                     </div>
-               <div className="song__info" passUpSongInfo={[title, date, venueName, venueLocation]}>
-                    <p>{title}</p>
-                    <p>{date}</p>
-                    <p>{venueName, venueLocation}</p>
-                </div>
+               <div className="song__info"></div>
             </header>
         )
     }
