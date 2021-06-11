@@ -12,7 +12,6 @@ export default class Play extends React.Component {
         this.togglePlay = this.togglePlay.bind(this);
         this.manuallyUpdateTime = this.manuallyUpdateTime.bind(this);
         this.playNextSong = this.playNextSong.bind(this);
-        this.passUpSongInfo = this.passUpSongInfo.bind(this);
     }
 
     componentDidMount() {
@@ -111,17 +110,8 @@ export default class Play extends React.Component {
         }
     }
 
-    passUpSongInfo(info) {
-        // this.props.currentSongInfo(info);
-    }
-
     render() {
-        // const title =  this.props.songToPlay && this.props.songToPlay[0].title;
-        // const date  =  this.props.songToPlay && this.props.songToPlay[0].show_date;
-        // const venueName  =  this.props.songToPlay && this.props.songToPlay[0].venue_name;
-        // const venueLocation  =  this.props.songToPlay && this.props.songToPlay[0].venue_location;
         const endTime = this.state.duration !== null ? this.state.duration : 0;
-        // this.passUpSongInfo([title, date, venueName, venueLocation])
         return (
             <header>
                <div className="logo">Jamdora</div>
@@ -157,22 +147,9 @@ export default class Play extends React.Component {
 
 // found nifty timer function from here:
 // https://dev.to/ma5ly/lets-make-a-little-audio-player-in-react-p4p
-// Below is my original one which only really worked for the duration time
 function getTime(time) {
     if(!isNaN(time)) {
       return Math.floor(time / 60) + ':' + ('0' + Math.floor(time % 60)).slice(-2)
     }
     return '0:00';
   }
-
-// function formatDurationTime(time) {
-//     if (time > 0) {
-//         time = (time / 60).toFixed(2);
-//         time = time.split('.');
-//         let seconds = parseInt(time[1]);
-//         let minutes = parseInt(time[0]);
-//         seconds = 100 - seconds;
-//         return `${minutes}:${seconds < 10 ? '0' + seconds : seconds }`;
-//     }
-//     return `0:00`;
-// }

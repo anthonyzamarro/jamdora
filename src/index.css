@@ -98,7 +98,7 @@ header,
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  flex: 1;
+  flex: 4 1;
   order: 2;
 }
 
@@ -207,13 +207,7 @@ header,
   }
 
   .time {
-    width: 20%;
-    order:1;
-    flex: 1;
+    order:0;
+    flex: 4 1;
   }
-
-  .song__info {
-    order:2;
-  }
-
 }
