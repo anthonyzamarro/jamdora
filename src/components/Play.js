@@ -21,10 +21,16 @@ export default class Play extends React.Component {
                 duration: Math.round(e.target.duration)
             });
         });
+        document.addEventListener('keydown', e => {
+            if (e.key === ' ') {
+                this.togglePlay()
+            }
+        })
     }
 
     componentWillUnmount() {
         this.audioRef.current.removeEventListener("timeupdate", () => {});
+        document.removeEventListener("keydown", () => {});
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -138,7 +144,7 @@ export default class Play extends React.Component {
                         />
                         </div>
                         <div className="time__end"> {getTime(endTime)} </div>
-                    </div>
+                    </div>``
             </header>
         )
     }
