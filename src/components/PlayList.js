@@ -60,7 +60,7 @@ export default class PlayList extends React.Component {
     render() {
         return (
             <div className="playlist">
-                <h2>Play List</h2>
+                <h2>Playlist</h2>
                 <div
                     onDrop={this.onDropHandler} 
                     onDragOver={this.onDragOverHandler}
@@ -74,13 +74,15 @@ export default class PlayList extends React.Component {
                                 <p key={index}>
                                     <div>{info.title}</div>
                                         {info.text}<br></br>
-                                        <div onClick={this.removeFromPlayList} id={index} className="btn btn-remove">X Remove&nbsp; </div>
+                                        <div onClick={this.removeFromPlayList} 
+						id={index} 
+						className="btn btn-playlist btn-remove">Remove x</div>
                                         <div 
-                                            className="btn btn-play"
+                                            className="btn btn-playlist btn-play"
                                             data-title={info.title}
                                             data-date={info.date}
                                             data-text={info.text}
-                                            onClick={this.playSong}>&nbsp; Play &gt;
+                                            onClick={this.playSong}>Play &gt;
                                         </div>
                                     </p>
                                 )

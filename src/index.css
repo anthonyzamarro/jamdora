@@ -2,6 +2,9 @@
   --bg-color: #0B3142;
   --primary: #BA5624; 
   --secondary: rgb(20, 206, 14);
+  --font-size-md: 1.5rem;
+  --font-size-sm: 1.1rem;
+
 }
 
 /*
@@ -25,7 +28,7 @@ h2 {
 }
 
 .App {
-  font-size: calc(10px + 2vmin);
+  font-size: var(--font-size-md);
   width: 100%;
   min-height: 100vh;
   background: var(--bg-color);
@@ -34,7 +37,12 @@ h2 {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
-  grid-template-areas: "center";
+ /* grid-template-areas: "center";*/
+ grid-template-areas: "header"
+ 			"time-controls"
+			"search"
+			"playlist"
+			"select"
 }
 
 .logo {
@@ -56,7 +64,6 @@ header {
 }
 
 .marked__song > p {
-  max-width: 200px;
   padding: 10px 0;
   margin: auto;
   border: 1px solid transparent;
@@ -115,6 +122,21 @@ header {
   cursor: pointer;
 }
 
+.btn-playlist {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px;
+    background-color: var(--primary);
+    border-radius: 20px;
+    margin-right: 8px;
+    transition: all .3s;
+    font-size: var(--font-size-sm);
+}
+
+.btn-playlist:hover {
+    box-shadow: 0px 4px 8px #000;
+}
+
 .time {
   width: 100%;
   display: flex;
@@ -162,13 +184,14 @@ header {
 /*
   Play List
 */
-.playlist {
-  height: 100vh;
+.playlist__container {
+	grid-area: playlist;
 }
 
-.playlist__zone {
-  height: 100%;
+.playlist {
+	height: auto;
 }
+
 
 /* Desktop styles */
 @media screen and (min-width: 767px) {
@@ -221,4 +244,11 @@ header {
     order:0;
     flex: 4 1;
   }
+	.playlist {
+	  height: 100vh;
+	}
+
+	.playlist__zone {
+	  height: 100%;
+	}
 }
