@@ -37,15 +37,14 @@ h2 {
   grid-template-areas: "center";
 }
 
-/* .container {
-  display: inline-block;
-  vertical-align: top;
-  width: 100%;
-} */
+.logo {
+  padding: 10px
+}
 
 header {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 /* 
 header,
@@ -116,7 +115,7 @@ header,
 }
 
 .time__duration {
-  flex-basis: 300px;
+  flex-basis: 75%;
   margin: 12px;
 }
 
@@ -164,7 +163,7 @@ header,
 @media screen and (min-width: 767px) {
   .App {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 50px 200px 100vh;
+    grid-template-rows: 100px 200px 100vh;
     grid-template-areas:
       "header header header header"
       "search . . playlist"
@@ -173,6 +172,7 @@ header,
 
   header {
     grid-area: header;
+    justify-content: flex-start;
   }
 
   .search-song__container {
