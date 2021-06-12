@@ -65,7 +65,7 @@ export default class FetchMarkedSong extends React.Component {
 
     render() {
         return (
-            <div className="song__marked">
+            <>
                 <h2>Select a Version</h2>
                <p>{this.props.markedSongTitle}</p>
                 {
@@ -78,6 +78,7 @@ export default class FetchMarkedSong extends React.Component {
                                 draggable="true"
                                 data-title={this.props.markedSongTitle}
                                 data-date={marked.showdate}
+                                className="marked__song"
                             >
                             <p 
                                 onClick={this.onClickHandler}>
@@ -88,7 +89,7 @@ export default class FetchMarkedSong extends React.Component {
                   } 
                 
 
-            </div>
+            </>
         )
     }
 }

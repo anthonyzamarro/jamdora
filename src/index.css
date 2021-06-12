@@ -21,7 +21,7 @@ ul {
 }
 
 h2 {
-  color:var(--primary);
+  color: var(--primary);
 }
 
 .App {
@@ -46,15 +46,6 @@ header {
   flex-wrap: wrap;
   justify-content: center;
 }
-/* 
-header,
-.search-song__container,
-.marked-song__container,
-.playlist__container {
-  grid-column: auto;
-  grid-row: auto;
-  grid-area: search;
-} */
 
 /*
   Song Search Input/Dropdown
@@ -64,8 +55,21 @@ header,
   vertical-align: top;
 }
 
-.song__marked {
-  display: inline-block;
+.marked__song > p {
+  max-width: 200px;
+  padding: 10px 0;
+  margin: auto;
+  border: 1px solid transparent;
+  box-shadow: none;
+  transition: all .1s .1s ease-in;
+}
+
+.marked__song > p:hover {
+  cursor: pointer;
+  color: var(--primary);
+  border: 1px solid #000;
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px #000;
 }
 
 .dropdown {
@@ -86,6 +90,11 @@ header,
 
 .dropdown__item {
   list-style: none;
+}
+
+.dropdown__item:hover {
+  color: var(--bg-color);
+  cursor: pointer;
 }
 
 
@@ -160,6 +169,7 @@ header,
   height: 100%;
 }
 
+/* Desktop styles */
 @media screen and (min-width: 767px) {
   .App {
     grid-template-columns: repeat(3, 1fr);
