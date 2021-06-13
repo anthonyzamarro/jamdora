@@ -14,7 +14,7 @@ export default class PlayList extends React.Component {
     }
 
     componentDidMount() {
-        if (JSON.parse(localStorage.localStoragePlaylist).length > 0) {
+        if (localStorage.localStoragePlaylist && JSON.parse(localStorage.localStoragePlaylist).length > 0) {
             this.setState({
                 playList: JSON.parse(localStorage.localStoragePlaylist)
             }, e => {

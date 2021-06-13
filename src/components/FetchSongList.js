@@ -31,9 +31,11 @@ export default class Fetch extends React.Component {
             }
 		}).catch(err => console.error(err));
 
-		const json = await allSongs.json().catch(err => console.error(err));
+		let json = await allSongs.json();
+		if (json) {
+			this.setState({ songs: json.response.data, loading: false });
+		}
 
-		this.setState({ songs: json.response.data, loading: false });
 	}	
 
 	updatePlayList(songs) {
