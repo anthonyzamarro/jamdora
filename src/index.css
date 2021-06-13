@@ -45,10 +45,6 @@ h2 {
 			"select"
 }
 
-.logo {
-  padding: 10px;
-  display: none;
-}
 
 header {
   display: flex;
@@ -64,6 +60,16 @@ header {
 /*
   Song Search Input/Dropdown
 */
+
+.songs__input {
+  min-width: 250px;;
+  height: 25px;
+}
+
+input:focus {
+  max-width: 250px;
+}
+
 .songs__all {
   display: inline-block;
   vertical-align: top;
@@ -191,6 +197,11 @@ header {
 .time__duration {
   flex-basis: 75%;
   margin: 12px;
+}
+
+.time__end,
+.time__start {
+  font-size: var(--font-size-sm);
 }
 
 .duration__elapsed {

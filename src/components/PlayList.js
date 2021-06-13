@@ -13,11 +13,22 @@ export default class PlayList extends React.Component {
         this.removeFromPlayList = this.removeFromPlayList.bind(this);
     }
 
+    componentDidMount() {
+        if (JSON.parse(localStorage.localStoragePlaylist).length > 0) {
+            this.setState({
+                playList: JSON.parse(localStorage.localStoragePlaylist)
+            }, e => {
+                this.props.addToPlayList(JSON.parse(localStorage.localStoragePlaylist))
+            });
+        }
+    }
+
      componentDidUpdate(prevProps, prevState) {
          if (prevProps.addedFromClick !== this.props.addedFromClick) {
             this.setState({
                 playList: this.state.playList.concat(this.props.addedFromClick)
             }, e => {
+                SavePlaylistLocalStorage(this.state.playList);
                 this.props.addToPlayList(this.state.playList);
             });
         }
@@ -37,6 +48,8 @@ export default class PlayList extends React.Component {
         copiedList.splice(parseInt(e.target.id), 1); 
         this.setState({
             playList: copiedList
+        }, e => {
+            SavePlaylistLocalStorage(copiedList);
         });
     }
 
@@ -49,6 +62,7 @@ export default class PlayList extends React.Component {
             playList: this.state.playList.concat({'title': title, 'text': text, 'date': date})
         }, e => {
             this.props.addToPlayList(this.state.playList);
+            SavePlaylistLocalStorage(this.state.playList);
         });
 
     }

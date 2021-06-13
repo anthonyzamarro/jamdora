@@ -1,5 +1,5 @@
 const SavePlaylistLocalStorage = (playList) => {
-    localStorage.setItem('hello')
+    localStorage.setItem('localStoragePlaylist', JSON.stringify(playList));
 }
 
 export default SavePlaylistLocalStorage;

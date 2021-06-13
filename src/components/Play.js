@@ -120,7 +120,6 @@ export default class Play extends React.Component {
         const endTime = this.state.duration !== null ? this.state.duration : 0;
         return (
             <header>
-               <div className="logo">Jamdora</div>
                <div className="controls">
                     <audio ref={this.audioRef}></audio>
                     <div className="btn controls__previous" onClick={this.playNextSong} id="prev"></div>

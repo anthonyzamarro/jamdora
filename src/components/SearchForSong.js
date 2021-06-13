@@ -82,6 +82,7 @@ export default class SearchForSong extends React.Component {
                     onFocus={this.onFocusHandler}
                     onBlur={this.onBlurHandler}
                     onChange={this.onChange}
+                    className="songs__input"
                 />
                 <ul 
                     className="dropdown"
