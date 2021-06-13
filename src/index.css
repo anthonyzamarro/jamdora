@@ -46,7 +46,8 @@ h2 {
 }
 
 .logo {
-  padding: 10px
+  padding: 10px;
+  display: none;
 }
 
 header {
@@ -207,7 +208,7 @@ header {
   background: var(--secondary);
   -webkit-appearance: none;
   appearance: none;
-  width: 8px;
+  width: 15px;
   height: 20px;
   cursor: pointer;
 }
