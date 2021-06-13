@@ -122,10 +122,10 @@ export default class Play extends React.Component {
             <header>
                <div className="logo">Jamdora</div>
                <div className="controls">
-                    <audio ref={this.audioRef} className="btn controls__play"></audio>
-                    <div className="btn controls__previous" onClick={this.playNextSong} id="prev"> &lt; </div>
-                    <div className="btn controls__play" onClick={this.togglePlay}> |&gt; </div>
-                    <div className="btn controls__next" onClick={this.playNextSong} id="next"> &gt; </div>
+                    <audio ref={this.audioRef}></audio>
+                    <div className="btn controls__previous" onClick={this.playNextSong} id="prev"></div>
+                    <div className="btn controls__play-container" onClick={this.togglePlay}><div className="controls__play"></div></div>
+                    <div className="btn controls__next" onClick={this.playNextSong} id="next"></div>
                 </div>
                <div className="time"> 
                         <div className="time__start"> {
