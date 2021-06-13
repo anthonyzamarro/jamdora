@@ -1,7 +1,7 @@
 :root {
   --bg-color: #0B3142;
   --primary: #BA5624; 
-  --secondary: rgb(20, 206, 14);
+  --secondary: #000;
   --font-size-md: 1.5rem;
   --font-size-sm: 1.1rem;
 
@@ -192,16 +192,12 @@ header {
   margin: 12px;
 }
 
-.duration {
-  position: relative;
-}
-
 .duration__elapsed {
-  position: absolute;
   background: var(--primary);
   -webkit-appearance: none;
   left: 0;
   width: 100%;
+  height: 20px;
   border-radius: 5px;
 }
 
@@ -212,7 +208,7 @@ header {
   -webkit-appearance: none;
   appearance: none;
   width: 8px;
-  height: 10px;
+  height: 20px;
   cursor: pointer;
 }
 
