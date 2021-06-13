@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/jamdora/static/css/main.883067f8.chunk.css",
-    "main.js": "/jamdora/static/js/main.b9d3e345.chunk.js",
-    "main.js.map": "/jamdora/static/js/main.b9d3e345.chunk.js.map",
+    "main.js": "/jamdora/static/js/main.d4ba09c7.chunk.js",
+    "main.js.map": "/jamdora/static/js/main.d4ba09c7.chunk.js.map",
     "runtime-main.js": "/jamdora/static/js/runtime-main.5fe73d84.js",
     "runtime-main.js.map": "/jamdora/static/js/runtime-main.5fe73d84.js.map",
     "static/js/2.0b4c65a5.chunk.js": "/jamdora/static/js/2.0b4c65a5.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.5fe73d84.js",
     "static/js/2.0b4c65a5.chunk.js",
     "static/css/main.883067f8.chunk.css",
-    "static/js/main.b9d3e345.chunk.js"
+    "static/js/main.d4ba09c7.chunk.js"
   ]
 }
